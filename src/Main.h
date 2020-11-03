@@ -5,6 +5,7 @@
 #include "Bullet.h"
 #include "Pattern.h"
 #include "Player.h"
+#include "GameStats.h"
 
 class CMain
 {
@@ -24,10 +25,8 @@ public:
 	void GameLoop();
 private:
 	CSDL_Setup* csdl_setup;
+	GameStats* gameStats;
 	std::vector<Pattern*> Patterns;
 
 	Player* player;
-	CSprite* heart1;
-	CSprite* heart2;
-	CSprite* heart3;
 };

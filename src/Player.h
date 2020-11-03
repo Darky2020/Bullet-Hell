@@ -37,7 +37,7 @@ public:
 	float returnPlayerPosX();
 	float returnPlayerPosY();
 
-	int returnPlayerHealt() {return health;}
+	int returnPlayerHealth() {return health;}
 
 	void GotHit();
 
