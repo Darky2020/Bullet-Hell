@@ -29,9 +29,6 @@ public:
 	float width;
 	float height;
 
-	float HEIGHT_MULTIPLIER;
-	float WIDTH_MULTIPLIER;
-
 	CSprite* sprite;
 	Player* player;
 

@@ -14,6 +14,6 @@
 #define HEIGHT 900
 #define WIDTH 1600
 
-// float HEIGHT_MULTIPLIER = (HEIGHT/HEIGHT_DEFAULT);
-// float WIDTH_MULTIPLIER = (WIDTH/WIDTH_DEFAULT);
+#define HEIGHT_MULTIPLIER (float)HEIGHT/(float)HEIGHT_DEFAULT
+#define WIDTH_MULTIPLIER (float)WIDTH/(float)WIDTH_DEFAULT
 // g++ Sprite.cpp SDL_Setup.cpp main.cpp Main.cpp Bullet.cpp Pattern.cpp Player.cpp -lSDL2 -lSDL2_image

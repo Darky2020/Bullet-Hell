@@ -5,10 +5,6 @@ CMain::CMain()
 	running = false;
 	csdl_setup = new CSDL_Setup(&running);
 
-	HEIGHT_MULTIPLIER = ((float)HEIGHT/(float)HEIGHT_DEFAULT);
-	WIDTH_MULTIPLIER = ((float)WIDTH/(float)WIDTH_DEFAULT);
-
-
 	Patterns.push_back(new Pattern(HEIGHT/2, HEIGHT/2, 0, 7, 10, 0, 5, 1, 0.05, 7, 360));
 	Patterns.push_back(new Pattern(HEIGHT/2, HEIGHT/2, 10, 7, 10, 0, 5, 1, 0.05, 3, 360));
 
@@ -35,7 +31,6 @@ void CMain::GameLoop()
 
 		SDL_Renderer* renderer = csdl_setup->GetRenderer();
 		SDL_Window* window = csdl_setup->GetWindow();
-
 
 		// if(csdl_setup->GetEvent()->type == SDL_MOUSEBUTTONDOWN) {
 		// 	if(csdl_setup->GetEvent()->button.button == SDL_BUTTON_LEFT && !clicked)

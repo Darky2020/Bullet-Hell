@@ -25,9 +25,6 @@ public:
 	float PlayerSpriteWidth;
 	float PlayerSpriteHeight;
 
-	float HEIGHT_MULTIPLIER;
-	float WIDTH_MULTIPLIER;
-
 	const Uint8 *state;
 
 	float centerX;

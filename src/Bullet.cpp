@@ -10,9 +10,6 @@ Bullet::Bullet(Player* Player, SDL_Renderer* renderer, float X, float Y, float a
 	angle = ang;
 	velocity = vel;
 
-	HEIGHT_MULTIPLIER = ((float)HEIGHT/(float)HEIGHT_DEFAULT);
-	WIDTH_MULTIPLIER = ((float)WIDTH/(float)WIDTH_DEFAULT);
-
 	width = 6*WIDTH_MULTIPLIER;
 	height = 16*HEIGHT_MULTIPLIER;
 

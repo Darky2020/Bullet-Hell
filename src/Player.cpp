@@ -7,9 +7,6 @@ Player::Player(SDL_Renderer* renderer, SDL_Event* event, int x, int y)
 
 	Event = event;
 
-	HEIGHT_MULTIPLIER = ((float)HEIGHT/(float)HEIGHT_DEFAULT);
-	WIDTH_MULTIPLIER = ((float)WIDTH/(float)WIDTH_DEFAULT);
-
 	PlayerSpriteWidth = 20*1.5*WIDTH_MULTIPLIER;
 	PlayerSpriteHeight = 24*1.5*HEIGHT_MULTIPLIER;
 	sprite = new CSprite(renderer, "packages/icons/player.png", PosX, PosY, PlayerSpriteWidth, PlayerSpriteHeight, 0);;
@@ -73,8 +70,6 @@ void Player::UpdatePlayer()
 
 	if(HitAtTime+2000 > SDL_GetTicks() && HitAtTime > 0) isInvulnerable = true;
 	else isInvulnerable = false;
-
-	printf("%i\n", health);
 
 	DrawPlayer();
 	Move();

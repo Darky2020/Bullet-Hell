@@ -21,10 +21,6 @@ public:
 	Uint32 frameStart;
 	int frameTime;
 
-	float HEIGHT_MULTIPLIER;
-	float WIDTH_MULTIPLIER;
-
-
 	void GameLoop();
 private:
 	CSDL_Setup* csdl_setup;
