@@ -60,15 +60,15 @@ void CMain::GameLoop()
 
 		// SDL_Rect hitbox;
 
-		// float x1 = (float)player->returnPlayerCenterX()-(2*HEIGHT_MULTIPLIER);
-		// float y1 = (float)player->returnPlayerCenterY()-(2*HEIGHT_MULTIPLIER);
+		// float x1 = (float)player->returnPlayerCenterX()-2;
+		// float y1 = (float)player->returnPlayerCenterY()-2;
 
 		/////////////////// Plan to add an option to toggle it
 
 		// hitbox.x = x1;
 		// hitbox.y = y1;
-		// hitbox.w = 4*HEIGHT_MULTIPLIER;
-        // hitbox.h = 4*HEIGHT_MULTIPLIER;
+		// hitbox.w = 4;
+        // hitbox.h = 4;
 
 		// SDL_SetRenderDrawColor(renderer, 255, 0, 0, 0);
 		// SDL_RenderFillRect(renderer, &hitbox);

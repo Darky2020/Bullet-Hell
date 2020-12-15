@@ -10,8 +10,8 @@ Bullet::Bullet(Player* Player, SDL_Renderer* renderer, float X, float Y, float a
 	angle = ang;
 	velocity = vel;
 
-	width = 6*WIDTH_MULTIPLIER;
-	height = 16*HEIGHT_MULTIPLIER;
+	width = 6;
+	height = 16;
 
 	sprite = new CSprite(renderer, "packages/icons/proj1.png", sourceX, sourceY, width, height, angle);
 
@@ -65,14 +65,14 @@ void Bullet::UpdateBullet()
 {
 	DrawBullet();
 	MoveBullet();
-	float x1 = (float)player->returnPlayerCenterX()-(1*HEIGHT_MULTIPLIER);
-	float y1 = (float)player->returnPlayerCenterY()-(1*HEIGHT_MULTIPLIER);
-	float x2 = (float)player->returnPlayerCenterX()+(1*HEIGHT_MULTIPLIER);
-	float y2 = (float)player->returnPlayerCenterY()-(1*HEIGHT_MULTIPLIER);
-	float x3 = (float)player->returnPlayerCenterX()+(1*HEIGHT_MULTIPLIER);
-	float y3 = (float)player->returnPlayerCenterY()+(1*HEIGHT_MULTIPLIER);
-	float x4 = (float)player->returnPlayerCenterX()-(1*HEIGHT_MULTIPLIER);
-	float y4 = (float)player->returnPlayerCenterY()+(1*HEIGHT_MULTIPLIER);
+	float x1 = (float)player->returnPlayerCenterX()-1;
+	float y1 = (float)player->returnPlayerCenterY()-1;
+	float x2 = (float)player->returnPlayerCenterX()+1;
+	float y2 = (float)player->returnPlayerCenterY()-1;
+	float x3 = (float)player->returnPlayerCenterX()+1;
+	float y3 = (float)player->returnPlayerCenterY()+1;
+	float x4 = (float)player->returnPlayerCenterX()-1;
+	float y4 = (float)player->returnPlayerCenterY()+1;
 	if(CheckIfCollidedWithPlayer(x1, y1, x2, y2, x3, y3, x4, y4) && !player->CheckIfInvulnerable())
 	{
 		player->GotHit();
@@ -81,7 +81,7 @@ void Bullet::UpdateBullet()
 
 bool Bullet::CheckIfOutOfBounds()
 {
-	return (sourceX > (HEIGHT+100)*HEIGHT_MULTIPLIER || sourceX < -100*HEIGHT_MULTIPLIER || sourceY > (HEIGHT+100)*HEIGHT_MULTIPLIER || sourceY < -100*HEIGHT_MULTIPLIER);
+	return (sourceX > (HEIGHT+100) || sourceX < -100 || sourceY > (HEIGHT+100) || sourceY < -100);
 }
 
 bool Bullet::CheckIfCollidedWithPlayer(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4)

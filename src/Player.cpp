@@ -7,11 +7,11 @@ Player::Player(SDL_Renderer* renderer, SDL_Event* event, int x, int y)
 
 	Event = event;
 
-	PlayerSpriteWidth = 20*1.5*WIDTH_MULTIPLIER;
-	PlayerSpriteHeight = 24*1.5*HEIGHT_MULTIPLIER;
+	PlayerSpriteWidth = 20*1.5;
+	PlayerSpriteHeight = 24*1.5;
 	sprite = new CSprite(renderer, "packages/icons/player.png", PosX, PosY, PlayerSpriteWidth, PlayerSpriteHeight, 0);;
 
-	speed = 6*HEIGHT_MULTIPLIER;
+	speed = 6;
 
 	state = SDL_GetKeyboardState(NULL);
 
