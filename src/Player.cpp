@@ -82,6 +82,7 @@ float Player::returnPlayerPosY() { return PosY; }
 
 void Player::GotHit()
 {
+	isInvulnerable = true;
 	HitAtTime = SDL_GetTicks();
 	health -= 1;
 }

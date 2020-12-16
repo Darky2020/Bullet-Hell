@@ -6,7 +6,7 @@ CMain::CMain()
 	csdl_setup = new CSDL_Setup(&running);
 
 	Patterns.push_back(new Pattern(HEIGHT/2, HEIGHT/2, 0, 7, 10, 0, 5, 1, 0.05, 7, 360));
-	Patterns.push_back(new Pattern(HEIGHT/2, HEIGHT/2, 10, 7, 10, 0, 5, 1, 0.05, 3, 360));
+	Patterns.push_back(new Pattern(HEIGHT/2, HEIGHT/2, 10, 7, 10, 0, 5, 1, 0, 90, 360));
 
 	player = new Player(csdl_setup->GetRenderer(), csdl_setup->GetEvent(), 400, 600);
 
