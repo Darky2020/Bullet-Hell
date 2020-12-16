@@ -3,6 +3,7 @@
 #include "include/SDL.h"
 #include "include/SDL_image.h"
 #include "include/SDL_mixer.h"
+#include "include/SDL_ttf.h"
 #include <iostream>
 #include <stdio.h>
 #include <math.h>

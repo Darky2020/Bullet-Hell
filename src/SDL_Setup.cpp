@@ -9,8 +9,10 @@ CSDL_Setup::CSDL_Setup(bool* running)
 	    *running = false;
 	}  
 
+	TTF_Init();
+
 	window = NULL;
-	window =  SDL_CreateWindow("Unnamed bullet hell", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, SDL_WINDOW_OPENGL);  
+	window =  SDL_CreateWindow("Unnamed bullet hell", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_OPENGL);  
 
 	if(window == NULL)
 	{
