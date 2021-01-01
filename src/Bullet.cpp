@@ -65,14 +65,14 @@ void Bullet::UpdateBullet()
 {
 	DrawBullet();
 	MoveBullet();
-	float x1 = (float)player->returnPlayerCenterX()-1;
-	float y1 = (float)player->returnPlayerCenterY()-1;
-	float x2 = (float)player->returnPlayerCenterX()+1;
-	float y2 = (float)player->returnPlayerCenterY()-1;
-	float x3 = (float)player->returnPlayerCenterX()+1;
-	float y3 = (float)player->returnPlayerCenterY()+1;
-	float x4 = (float)player->returnPlayerCenterX()-1;
-	float y4 = (float)player->returnPlayerCenterY()+1;
+	float x1 = (float)player->returnPlayerCenterX()-2;
+	float y1 = (float)player->returnPlayerCenterY()-2;
+	float x2 = (float)player->returnPlayerCenterX()+2;
+	float y2 = (float)player->returnPlayerCenterY()-2;
+	float x3 = (float)player->returnPlayerCenterX()+2;
+	float y3 = (float)player->returnPlayerCenterY()+2;
+	float x4 = (float)player->returnPlayerCenterX()-2;
+	float y4 = (float)player->returnPlayerCenterY()+2;
 	if(CheckIfCollidedWithPlayer(x1, y1, x2, y2, x3, y3, x4, y4) && !player->CheckIfInvulnerable())
 	{
 		player->GotHit();
@@ -86,15 +86,42 @@ bool Bullet::CheckIfOutOfBounds()
 
 bool Bullet::CheckIfCollidedWithPlayer(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4)
 {	
+
+	float tempX1 = x1 - (sourceX+width/2);
+	float tempY1 = y1 - (sourceY+height/2);
+
+	float tempX2 = x2 - (sourceX+width/2);
+	float tempY2 = y2 - (sourceY+height/2);
+
+	float tempX3 = x3 - (sourceX+width/2); // actually not needed rn but might be in the future
+	float tempY3 = y3 - (sourceY+height/2); // actually not needed rn but might be in the future
+
+	float tempX4 = x4 - (sourceX+width/2);
+	float tempY4 = y4 - (sourceY+height/2);
+
+	float rotatedX1 = tempX1*cos(angle) - tempY1*sin(angle);
+	float rotatedY1 = tempX1*sin(angle) + tempY1*cos(angle);
+
+	float rotatedX2 = tempX2*cos(angle) - tempY2*sin(angle);
+	float rotatedY2 = tempX2*sin(angle) + tempY2*cos(angle);
+
+	float rotatedX3 = tempX3*cos(angle) - tempY3*sin(angle); // actually not needed rn but might be in the future
+	float rotatedY3 = tempX3*sin(angle) + tempY3*cos(angle); // actually not needed rn but might be in the future
+
+	float rotatedX4 = tempX4*cos(angle) - tempY4*sin(angle);
+	float rotatedY4 = tempX4*sin(angle) + tempY4*cos(angle);
+
 	// Top_Right
-	float Bx = sourceX + ((width / 2) * cos(angle)) - ((height / 2) * sin(angle));
-	float By = sourceY + ((width / 2) * sin(angle)) + ((height / 2) * cos(angle));
+	float Bx = rotatedX2 + (sourceX+width/2);
+	float By = rotatedY2 + (sourceY+height/2);
+
 	// Top_Left
-	float Ax = sourceX - ((width / 2) * cos(angle)) - ((height / 2) * sin(angle));
-	float Ay = sourceY - ((width / 2) * sin(angle)) + ((height / 2) * cos(angle));
+	float Ax = rotatedX1 + (sourceX+width/2);
+	float Ay = rotatedY1 + (sourceY+height/2);
+
 	// Bot_Left
-	float Dx = sourceX - ((width / 2) * cos(angle)) + ((height / 2) * sin(angle));
-	float Dy = sourceY - ((width / 2) * sin(angle)) - ((height / 2) * cos(angle));
+	float Dx = rotatedX4 + (sourceX+width/2);
+	float Dy = rotatedY4 + (sourceY+height/2);
 
 	float Mx = x1;
 	float My = y1;
