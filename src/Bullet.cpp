@@ -13,6 +13,8 @@ Bullet::Bullet(Player* Player, SDL_Renderer* renderer, float X, float Y, float a
 	width = 6;
 	height = 16;
 
+	renderer_ = renderer;
+
 	sprite = new CSprite(renderer, "packages/icons/proj1.png", sourceX, sourceY, width, height, angle);
 
 	player = Player;
@@ -31,7 +33,7 @@ auto Bullet::calculate_distance (float centerX, float centerY, float angle, floa
 
 	angle *= -1;
 	angle += 90;
-	angle = M_PI * angle / 180 ;
+	angle = M_PI/ 180 * angle;
 
 
 	float x = centerX + velocity * cos(angle);
@@ -78,7 +80,7 @@ void Bullet::UpdateBullet()
 	float centerY = sourceY + height/2;
 
 
-	if(CheckIfCollidedWithPlayer((float)player->returnPlayerCenterX(), (float)player->returnPlayerCenterY(), 2, centerX, centerY, width, height) && !player->CheckIfInvulnerable())
+	if(CheckIfCollidedWithPlayer((float)player->returnPlayerCenterX(), (float)player->returnPlayerCenterY(), 5, centerX, centerY, width, height) && !player->CheckIfInvulnerable())
 	{
 		player->GotHit();
 	}
@@ -91,32 +93,33 @@ bool Bullet::CheckIfOutOfBounds()
 
 bool Bullet::CheckIfCollidedWithPlayer(float circleX, float circleY, float circleR, float centerX, float centerY, float rectW, float rectH)
 {
-	double unrotatedCircleX = cos(angle) * (circleX - centerX) - sin(angle) * (circleY - centerY) + centerX;
-	double unrotatedCircleY  = sin(angle) * (circleX - centerX) + cos(angle) * (circleY - centerY) + centerY;
-	 
-	double closestX, closestY;
-	 
-	if (unrotatedCircleX  < sourceX)
-	    closestX = sourceX;
-	else if (unrotatedCircleX  > sourceX + rectW)
-	    closestX = sourceX + rectW;
-	else
-	    closestX = unrotatedCircleX ;
-	 
-	if (unrotatedCircleY < sourceY)
-	    closestY = sourceY;
-	else if (unrotatedCircleY > sourceY + rectH)
-	    closestY = sourceY + rectH;
-	else
-	    closestY = unrotatedCircleY;
+	float RadAngle = M_PI / 180 * (360 - angle);
 
-	double a = abs(unrotatedCircleX - closestX);
-    double b = abs(unrotatedCircleY - closestY);
- 
-    double distance = ceil((a * a) + (b * b));
-	 
-	if (distance < circleR*circleR)
-	    return true;
+	float rotatedX = cos(RadAngle) * (circleX-centerX) - sin(RadAngle) * (circleY-centerY) + centerX;
+	float rotatedY = sin(RadAngle) * (circleX-centerX) + cos(RadAngle) * (circleY-centerY) + centerY;
+
+	float testX = rotatedX;
+	float testY = rotatedY;
+
+	float rx = centerX - rectW/2;
+	float ry = centerY - rectH/2;
+
+	if (rotatedX < rx)         testX = rx;      // test left edge
+	else if (rotatedX > rx+rectW) testX = rx+rectW;   // right edge
+
+	if (rotatedY < ry)         testY = ry;      // top edge
+	else if (rotatedY > ry+rectH) testY = ry+rectH;   // bottom edge
+
+	float distX = abs(rotatedX-testX);
+	float distY = abs(rotatedY-testY);
+
+	float distance =  distX*distX + distY*distY ;
+
+	if (distance <= circleR*circleR) {
+		return true;
+	}
 	else
-	    return false;
+	{
+		return false;
+	}
 }

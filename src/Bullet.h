@@ -29,6 +29,8 @@ public:
 	float width;
 	float height;
 
+	SDL_Renderer* renderer_;
+
 	CSprite* sprite;
 	Player* player;
 
