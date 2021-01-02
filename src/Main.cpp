@@ -1,4 +1,5 @@
 #include "Main.h"
+#include "SDL_DrawCircle.h"
 
 CMain::CMain()
 {
@@ -6,17 +7,17 @@ CMain::CMain()
 	csdl_setup = new CSDL_Setup(&running);
 
 	// Patterns.push_back(new Pattern(HEIGHT/2, HEIGHT/2, 0, 7, 10, 0, 5, 1, 0.05, 7, 360));
-	Patterns.push_back(new Pattern(HEIGHT/2-250, HEIGHT/2-250, 0, 0, 100, 90, 1, 1, 0, 2, 90));
-	Patterns.push_back(new Pattern(HEIGHT/2+250, HEIGHT/2+250, 0, 0, 100, 270, 1, 1, 0, 2, 90));
-	Patterns.push_back(new Pattern(HEIGHT/2-300, HEIGHT/2-300, 0, 0, 100, 90, 1, 1, 0, 2, 90));
-	Patterns.push_back(new Pattern(HEIGHT/2+300, HEIGHT/2+300, 0, 0, 100, 270, 1, 1, 0, 2, 90));
+	// Patterns.push_back(new Pattern(HEIGHT/2-250, HEIGHT/2-250, 0, 0, 100, 90, 1, 1, 0, 2, 90));
+	// Patterns.push_back(new Pattern(HEIGHT/2+250, HEIGHT/2+250, 0, 0, 100, 270, 1, 1, 0, 2, 90));
+	// Patterns.push_back(new Pattern(HEIGHT/2-300, HEIGHT/2-300, 0, 0, 100, 90, 1, 1, 0, 2, 90));
+	// Patterns.push_back(new Pattern(HEIGHT/2+300, HEIGHT/2+300, 0, 0, 100, 270, 1, 1, 0, 2, 90));
 
-	Patterns.push_back(new Pattern(0, 0, 0, 0, 100, 135, 1, 1, 0, 1, 360));
-	Patterns.push_back(new Pattern(50, 0, 0, 0, 100, 135, 1, 1, 0, 1, 360));
-	Patterns.push_back(new Pattern(0, 50, 0, 0, 100, 135, 1, 1, 0, 1, 360));
-	Patterns.push_back(new Pattern(0, HEIGHT, 0, 0, 100, 45, 1, 1, 0, 1, 360));
-	Patterns.push_back(new Pattern(50, HEIGHT, 0, 0, 100, 45, 1, 1, 0, 1, 360));
-	Patterns.push_back(new Pattern(0, HEIGHT-50, 0, 0, 100, 45, 1, 1, 0, 1, 360));
+	// Patterns.push_back(new Pattern(0, 0, 0, 0, 100, 135, 1, 1, 0, 1, 360));
+	// Patterns.push_back(new Pattern(50, 0, 0, 0, 100, 135, 1, 1, 0, 1, 360));
+	// Patterns.push_back(new Pattern(0, 50, 0, 0, 100, 135, 1, 1, 0, 1, 360));
+	// Patterns.push_back(new Pattern(0, HEIGHT, 0, 0, 100, 45, 1, 1, 0, 1, 360));
+	// Patterns.push_back(new Pattern(50, HEIGHT, 0, 0, 100, 45, 1, 1, 0, 1, 360));
+	// Patterns.push_back(new Pattern(0, HEIGHT-50, 0, 0, 100, 45, 1, 1, 0, 1, 360));
 
 	Patterns.push_back(new Pattern(0, HEIGHT/2, 0, 0, 100, 90, 1, 1, 0, 1, 360));
 	Patterns.push_back(new Pattern(HEIGHT/2, 0, 0, 0, 100, 180, 1, 1, 0, 1, 360));
@@ -74,22 +75,16 @@ void CMain::GameLoop()
 
 		player->UpdatePlayer();
 
-		SDL_Rect hitbox;
-
-		float x1 = (float)player->returnPlayerCenterX()-2;
-		float y1 = (float)player->returnPlayerCenterY()-2;
+		int x1 = (int)player->returnPlayerCenterX();
+		int y1 = (int)player->returnPlayerCenterY();
 
 		///////////////// Plan to add an option to toggle it
 
-		hitbox.x = x1;
-		hitbox.y = y1;
-		hitbox.w = 4;
-        hitbox.h = 4;
-
 		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 0);
-		SDL_RenderFillRect(renderer, &hitbox);
+		SDL_RenderFillCircle(renderer, x1, y1, 5);
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 
+		
 		///////////////////
 
 		gameStats->DrawBG();
@@ -97,7 +92,6 @@ void CMain::GameLoop()
 
 		SDL_RenderPresent(renderer);
 	    SDL_UpdateWindowSurface(window); 
-
 
 
 		csdl_setup->End();

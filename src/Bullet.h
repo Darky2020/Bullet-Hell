@@ -18,7 +18,7 @@ public:
 	void MoveBullet();
 
 	bool CheckIfOutOfBounds();
-	bool CheckIfCollidedWithPlayer(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4);
+	bool CheckIfCollidedWithPlayer(float circleX, float circleY, float circleR, float rectX, float rectY, float rectW, float rectH);
 
 	float sourceX;
 	float sourceY;

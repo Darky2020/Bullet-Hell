@@ -7,9 +7,9 @@ Player::Player(SDL_Renderer* renderer, SDL_Event* event, int x, int y)
 
 	Event = event;
 
-	PlayerSpriteWidth = 20*1.5;
-	PlayerSpriteHeight = 24*1.5;
-	sprite = new CSprite(renderer, "packages/icons/player.png", PosX, PosY, PlayerSpriteWidth, PlayerSpriteHeight, 0);;
+	PlayerSpriteWidth = 30;
+	PlayerSpriteHeight = 36;
+	sprite = new CSprite(renderer, "packages/icons/player.png", PosX, PosY, PlayerSpriteWidth, PlayerSpriteHeight, 0);
 
 	speed = 6;
 
@@ -37,6 +37,7 @@ void Player::DrawPlayer()
 
 void Player::Move()
 {
+	// Needs a rework
     if(state[SDL_SCANCODE_LSHIFT])
     {
     
@@ -65,8 +66,8 @@ void Player::Move()
 
 void Player::UpdatePlayer()
 {
-	centerX = PosX+(PlayerSpriteWidth)/2;
-	centerY = PosY+(PlayerSpriteHeight)/2;
+	centerX = (float)PosX+(PlayerSpriteWidth/2);
+	centerY = (float)PosY+(PlayerSpriteHeight/2);
 
 	if(HitAtTime+2000 > SDL_GetTicks() && HitAtTime > 0) isInvulnerable = true;
 	else isInvulnerable = false;
