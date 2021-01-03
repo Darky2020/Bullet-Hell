@@ -1,6 +1,6 @@
-#include "GameStats.h"
+#include "GameHud.h"
 
-GameStats::GameStats(SDL_Renderer* Renderer) {
+GameHud::GameHud(SDL_Renderer* Renderer) {
 	renderer = Renderer;
 
 	// heart1 = new CSprite(renderer, "packages/icons/heart_icon.png", HEIGHT+20, 10, 48, 48, 0);
@@ -10,7 +10,7 @@ GameStats::GameStats(SDL_Renderer* Renderer) {
 	HealthText = new CText(renderer, HEIGHT+20, 10, 30, 255, 255, 255, "Health: ");
 }
 
-void GameStats::DrawBG() {
+void GameHud::DrawBG() {
 	SDL_Rect rect;
 
 	// Draw a black rect outside of playfield to clear anything (like bullets) that could go out of bounds
@@ -40,7 +40,7 @@ void GameStats::DrawBG() {
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 }
 
-void GameStats::DrawHearts(int health)
+void GameHud::DrawHearts(int health)
 {
 	// I really dont like this part, I wanna make a vector of hearts
 	// if(health > 0) heart1->Draw();

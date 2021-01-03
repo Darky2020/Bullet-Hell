@@ -27,7 +27,7 @@ CMain::CMain()
 
 	player = new Player(csdl_setup->GetRenderer(), csdl_setup->GetEvent(), 400, 600);
 
-	gameStats = new GameStats(csdl_setup->GetRenderer());
+	gameStats = new GameHud(csdl_setup->GetRenderer());
 
 }
 

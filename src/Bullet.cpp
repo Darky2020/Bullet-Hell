@@ -67,14 +67,6 @@ void Bullet::UpdateBullet()
 {
 	DrawBullet();
 	MoveBullet();
-	float x1 = (float)player->returnPlayerCenterX()-5;
-	float y1 = (float)player->returnPlayerCenterY()-5;
-	float x2 = (float)player->returnPlayerCenterX()+5;
-	float y2 = (float)player->returnPlayerCenterY()-5;
-	float x3 = (float)player->returnPlayerCenterX()+5;
-	float y3 = (float)player->returnPlayerCenterY()+5;
-	float x4 = (float)player->returnPlayerCenterX()-5;
-	float y4 = (float)player->returnPlayerCenterY()+5;
 
 	float centerX = sourceX + width/2;
 	float centerY = sourceY + height/2;

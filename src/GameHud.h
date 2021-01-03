@@ -3,11 +3,11 @@
 #include "Sprite.h"
 #include "Text.h"
 
-class GameStats
+class GameHud
 {
 public:
-	GameStats(SDL_Renderer* Renderer);
-	~GameStats();
+	GameHud(SDL_Renderer* Renderer);
+	~GameHud();
 
 	void DrawBG();
 
