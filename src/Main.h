@@ -23,6 +23,7 @@ public:
 	int frameTime;
 
 	void GameLoop();
+	Pattern* GetPatternByID(int id);
 private:
 	CSDL_Setup* csdl_setup;
 	GameHud* gameStats;

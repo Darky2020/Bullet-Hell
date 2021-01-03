@@ -5,25 +5,8 @@ CMain::CMain()
 {
 	running = false;
 	csdl_setup = new CSDL_Setup(&running);
-
-	// Patterns.push_back(new Pattern(HEIGHT/2, HEIGHT/2, 0, 7, 10, 0, 5, 1, 0.05, 7, 360));
-	// Patterns.push_back(new Pattern(HEIGHT/2-250, HEIGHT/2-250, 0, 0, 100, 90, 1, 1, 0, 2, 90));
-	// Patterns.push_back(new Pattern(HEIGHT/2+250, HEIGHT/2+250, 0, 0, 100, 270, 1, 1, 0, 2, 90));
-	// Patterns.push_back(new Pattern(HEIGHT/2-300, HEIGHT/2-300, 0, 0, 100, 90, 1, 1, 0, 2, 90));
-	// Patterns.push_back(new Pattern(HEIGHT/2+300, HEIGHT/2+300, 0, 0, 100, 270, 1, 1, 0, 2, 90));
-
-	// Patterns.push_back(new Pattern(0, 0, 0, 0, 100, 135, 1, 1, 0, 1, 360));
-	// Patterns.push_back(new Pattern(50, 0, 0, 0, 100, 135, 1, 1, 0, 1, 360));
-	// Patterns.push_back(new Pattern(0, 50, 0, 0, 100, 135, 1, 1, 0, 1, 360));
-	// Patterns.push_back(new Pattern(0, HEIGHT, 0, 0, 100, 45, 1, 1, 0, 1, 360));
-	// Patterns.push_back(new Pattern(50, HEIGHT, 0, 0, 100, 45, 1, 1, 0, 1, 360));
-	// Patterns.push_back(new Pattern(0, HEIGHT-50, 0, 0, 100, 45, 1, 1, 0, 1, 360));
-
-	Patterns.push_back(new Pattern(0, HEIGHT/2, 0, 0, 100, 90, 1, 1, 0, 1, 360));
-	Patterns.push_back(new Pattern(HEIGHT/2, 0, 0, 0, 100, 180, 1, 1, 0, 1, 360));
-
-	// Patterns.push_back(new Pattern(HEIGHT/2+250, HEIGHT/2-250, 0, 0, 100, 0, 5, 1, 0, 2, 90));
-	// Patterns.push_back(new Pattern(HEIGHT/2-250, HEIGHT/2+250, 0, 0, 100, 0, 5, 1, 0, 2, 90));
+	// int id, float x, float y, float startAt, float step, float dur, float ang, float vel, int rate, float accel, int rays, float spread
+	Patterns.push_back(new Pattern(0, HEIGHT/2, HEIGHT/2, 0, 5, 100, 0, 5, 1, 0, 5, 360));
 
 	player = new Player(csdl_setup->GetRenderer(), csdl_setup->GetEvent(), 400, 600);
 
@@ -34,6 +17,27 @@ CMain::CMain()
 CMain::~CMain(void)
 {
 
+}
+
+Pattern* CMain::GetPatternByID(int id)
+{
+	std::vector<Pattern*>::iterator PatternIterator;
+	int index = 0;
+
+	for(PatternIterator = Patterns.begin(); PatternIterator != Patterns.end();)
+	{
+		if(Patterns[index]->GetID() == id)
+		{
+			return Patterns[index];
+		}
+		else
+		{
+			++PatternIterator;
+	 		index++;
+		}
+	}
+
+	return NULL;
 }
 
 void CMain::GameLoop()
@@ -72,6 +76,8 @@ void CMain::GameLoop()
 		 		index++;
 			}
 		}
+
+		if(SDL_GetTicks() > 5000 && SDL_GetTicks() > 5100) GetPatternByID(0)->ChangePattern(NULL, NULL, -13, NULL, NULL, NULL, NULL, NULL, NULL);
 
 		player->UpdatePlayer();
 

@@ -5,8 +5,10 @@
 class Pattern
 {
 public:
-	Pattern(float x, float y, float start, float step, float dur, float ang, float vel, int rate, float accel, int rays, float spread);
+	Pattern(int id, float x, float y, float start, float step, float dur, float ang, float vel, int rate, float accel, int rays, float spread);
 	~Pattern();
+
+	int pattern_id;
 
 	float sourceX;
 	float sourceY;
@@ -28,5 +30,9 @@ public:
 	void UpdatePattern(Player* Player, SDL_Renderer* renderer);
 
 	bool CanDeletePattern();
+
+	int GetID();
+
+	void ChangePattern(float x, float y, float step, float ang, float vel, int rate, float accel, int rays, float spread);
 	
 };
