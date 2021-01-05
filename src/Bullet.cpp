@@ -13,8 +13,6 @@ Bullet::Bullet(Player* Player, SDL_Renderer* renderer, float X, float Y, float a
 	width = 6;
 	height = 16;
 
-	renderer_ = renderer;
-
 	sprite = new CSprite(renderer, "packages/icons/proj1.png", sourceX, sourceY, width, height, angle);
 
 	player = Player;

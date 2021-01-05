@@ -1,3 +1,5 @@
+#pragma once
+
 #include "main.h"
 #include "Bullet.h"
 #include "Player.h"

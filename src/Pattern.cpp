@@ -22,16 +22,7 @@ Pattern::Pattern(int id, float x, float y, float startAt, float step, float dur,
 
 Pattern::~Pattern()
 {
-	// std::vector<Bullet*>::iterator BulletIterator;
-	// int index = 0;
 
-	// for(BulletIterator = Bullets.begin(); BulletIterator != Bullets.end();)
-	// {
-	// 	delete Bullets[index];
-	// 	Bullets[index] = NULL;
-	// 	BulletIterator = Bullets.erase(BulletIterator); 
-	// 	index+=1;
-	// }
 }
 
 void Pattern::UpdatePattern(Player* Player, SDL_Renderer* renderer)
@@ -57,7 +48,6 @@ void Pattern::UpdatePattern(Player* Player, SDL_Renderer* renderer)
 
 	if(SDL_GetTicks() - lastSpawn > FireRate && SDL_GetTicks() - firstSpawn < duration && SDL_GetTicks() >= startAtTime)
 		{
-
 			float offset = 0;
 			if(NumOfRays == 1) offset = 0;
 			else if(PatternSpread == 360) offset = (PatternSpread/(NumOfRays));
@@ -65,7 +55,6 @@ void Pattern::UpdatePattern(Player* Player, SDL_Renderer* renderer)
 
 			for(int i = 0; i < NumOfRays; i++)
 			{	
-
 				Bullets.push_back(new Bullet(Player, renderer, sourceX, sourceY, angle+(offset*i), velocity, acceleration));
 			}
 
@@ -87,13 +76,13 @@ int Pattern::GetID()
 
 void Pattern::ChangePattern(float x, float y, float step, float ang, float vel, int rate, float accel, int rays, float spread)
 {
-	if(x != NULL)      sourceX = x;
-	if(y != NULL)      sourceY = y;
-	if(step != NULL)   angleStep = step;
-	if(ang != NULL)    angle = ang;
-	if(vel != NULL)    velocity = vel;
-	if(rate != NULL)   FireRate = rate;
-	if(accel != NULL)  acceleration = accel;
-	if(rays != NULL)   NumOfRays = rays;
-	if(spread != NULL) PatternSpread = spread;
+	if(x != None)      sourceX = x;
+	if(y != None)      sourceY = y;
+	if(step != None)   angleStep = step;
+	if(ang != None)    angle = ang;
+	if(vel != None)    velocity = vel;
+	if(rate != None)   FireRate = rate*100;
+	if(accel != None)  acceleration = accel;
+	if(rays != None)   NumOfRays = rays;
+	if(spread != None) PatternSpread = spread;
 }
