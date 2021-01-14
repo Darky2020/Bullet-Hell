@@ -25,7 +25,7 @@ Pattern::~Pattern()
 
 }
 
-void Pattern::UpdatePattern(Player* Player, SDL_Renderer* renderer)
+void Pattern::UpdatePattern(Player* Player, SDL_Renderer* renderer, int LevelStartedAt)
 {
 	std::vector<Bullet*>::iterator BulletIterator;
 	int index = 0;
@@ -46,7 +46,7 @@ void Pattern::UpdatePattern(Player* Player, SDL_Renderer* renderer)
 		}
 	}
 
-	if(SDL_GetTicks() - lastSpawn > FireRate && SDL_GetTicks() - firstSpawn < duration && SDL_GetTicks() >= startAtTime)
+	if(SDL_GetTicks() - lastSpawn > FireRate && SDL_GetTicks() - firstSpawn < duration && SDL_GetTicks()-LevelStartedAt >= startAtTime)
 		{
 			float offset = 0;
 			if(NumOfRays == 1) offset = 0;

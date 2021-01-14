@@ -22,8 +22,13 @@ public:
 
 	void UpdateGameObjects();
 
+	void LoadLevel();
+
 	std::vector<Pattern*> Patterns;
 	std::vector<Trigger*> Triggers;
+
+	bool levelStarted;
+	int LevelStartedAt;
 
 private:
 	Player* player;

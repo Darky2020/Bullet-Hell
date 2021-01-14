@@ -31,5 +31,5 @@ public:
 	int GetChangeRays() { return changeRays; }
 	float GetChangeSpread() { return changeSpread; }
 
-	bool CheckIfCanBeExecuted();
+	bool CheckIfCanBeExecuted(int LevelStartedAt);
 };

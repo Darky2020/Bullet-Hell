@@ -5,6 +5,7 @@
 #include "include/SDL_mixer.h"
 #include "include/SDL_ttf.h"
 #include <iostream>
+#include <string>
 #include <stdio.h>
 #include <math.h>
 #include <vector>

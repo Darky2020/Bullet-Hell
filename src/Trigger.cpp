@@ -22,8 +22,8 @@ Trigger::~Trigger()
 
 }
 
-bool Trigger::CheckIfCanBeExecuted()
+bool Trigger::CheckIfCanBeExecuted(int LevelStartedAt)
 {
-	if(SDL_GetTicks() >= ExecuteTime) return true;
+	if(SDL_GetTicks()-LevelStartedAt >= ExecuteTime) return true;
 	else return false;
 }
