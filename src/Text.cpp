@@ -1,6 +1,6 @@
 #include "Text.h"
  
-CText::CText(SDL_Renderer* passed_renderer, int x, int y, int size, int r, int g, int b, std::string TextToDisplay)
+CText::CText(SDL_Renderer* passed_renderer, int x, int y, int size, uint8_t r, uint8_t g, uint8_t b, std::string TextToDisplay)
 {
         renderer = passed_renderer;
         font = TTF_OpenFont("packages/fonts/font.ttf", size);
@@ -36,7 +36,7 @@ void CText::Draw()
         SDL_RenderCopy(renderer, texture, NULL, &dstrect);
 }
 
-void CText::ChangeColor(int r, int g, int b)
+void CText::ChangeColor(uint8_t r, uint8_t g, uint8_t b)
 {
         color = { r, g, b };
 }

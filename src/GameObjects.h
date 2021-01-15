@@ -22,7 +22,7 @@ public:
 
 	void UpdateGameObjects();
 
-	void LoadLevel();
+	void LoadLevel(std::string levelName);
 
 	std::vector<Pattern*> Patterns;
 	std::vector<Trigger*> Triggers;

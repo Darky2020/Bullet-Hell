@@ -116,14 +116,52 @@ void GameObjects::UpdateGameObjects() {
 	gameStats->DrawHearts(player->returnPlayerHealth());
 }
 
-void GameObjects::LoadLevel() {
+void GameObjects::LoadLevel(std::string levelName) {
 	Patterns.clear();
 	Triggers.clear();
 
 	LevelStartedAt = SDL_GetTicks();
 	levelStarted = true;
 
-	AddPattern(new Pattern(0, HEIGHT/2, HEIGHT/2, 0, 5, 100, 0, 5, 1, 0, 5, 360));
-	AddTrigger(new Trigger(5000, 0, None, None, None, None, None, None, -0.1, None, None));
-	AddTrigger(new Trigger(10000, 0, None, None, None, None, 2, None, 0, None, None));
+	std::ifstream leveldata(levelName);
+	std::string line;
+	while (std::getline(leveldata, line)) {
+    	if(line.find("Pattern") != std::string::npos)
+    	{
+    		unsigned first = line.find("{") + 1;
+			unsigned last = line.find("}");
+			std::string actualdata = line.substr(first, last-first);
+
+			std::vector<char*> arguments;
+
+			char *token = strtok(strdup(actualdata.c_str()), ", ");
+
+			while (token != NULL)
+		    {
+		    	arguments.push_back(token);
+		        token = strtok(NULL, ", ");
+		    }
+
+			AddPattern(new Pattern(std::stoi(arguments[0]), std::stof(arguments[1]), std::stof(arguments[2]), std::stof(arguments[3]), std::stof(arguments[4]), std::stof(arguments[5]), std::stof(arguments[6]), std::stof(arguments[7]), std::stoi(arguments[8]), std::stof(arguments[9]), std::stoi(arguments[10]), std::stof(arguments[11])));
+    	}
+    	if(line.find("Trigger") != std::string::npos)
+    	{
+    		unsigned first = line.find("{") + 1;
+			unsigned last = line.find("}");
+			std::string actualdata = line.substr(first, last-first);
+
+			std::vector<char*> arguments;
+
+			char *token = strtok(strdup(actualdata.c_str()), ", ");
+
+			while (token != NULL)
+		    {
+		    	if(strcmp(token, "None") == 0) token = (char*)"-9999999";
+		    	arguments.push_back(token);
+		        token = strtok(NULL, ", ");
+		    }
+
+			AddTrigger(new Trigger(std::stoi(arguments[0]), std::stoi(arguments[1]), std::stof(arguments[2]), std::stof(arguments[3]), std::stof(arguments[4]), std::stof(arguments[5]), std::stof(arguments[6]), std::stoi(arguments[7]), std::stof(arguments[8]), std::stoi(arguments[9]), std::stof(arguments[10])));
+    	}
+  	}
 }

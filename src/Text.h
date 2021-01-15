@@ -3,11 +3,11 @@
 class CText
 {
 public:
-        CText(SDL_Renderer* passed_renderer, int x, int y, int size, int r, int g, int b, std::string TextToDisplay);
+        CText(SDL_Renderer* passed_renderer, int x, int y, int size, uint8_t r, uint8_t g, uint8_t b, std::string TextToDisplay);
         ~CText();
  
         void Draw();
-        void ChangeColor(int r, int g, int b);
+        void ChangeColor(uint8_t r, uint8_t g, uint8_t b);
         void ChangeText(std::string TextToDisplay);
  
 private:

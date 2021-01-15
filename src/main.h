@@ -4,11 +4,12 @@
 #include "include/SDL_image.h"
 #include "include/SDL_mixer.h"
 #include "include/SDL_ttf.h"
+
 #include <iostream>
 #include <string>
-#include <stdio.h>
 #include <math.h>
 #include <vector>
+#include <bits/stdc++.h>
 
 #define HEIGHT 720
 #define WIDTH 1280
