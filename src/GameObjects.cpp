@@ -12,7 +12,10 @@ GameObjects::GameObjects(SDL_Renderer* renderer, SDL_Event* event) {
 }
 
 GameObjects::~GameObjects() {
-
+	delete player;
+	player = NULL;
+	delete gameStats;
+	gameStats = NULL;
 }
 
 void GameObjects::UpdatePatterns() {
@@ -142,7 +145,7 @@ void GameObjects::LoadLevel(std::string levelName) {
 		        token = strtok(NULL, ", ");
 		    }
 
-			AddPattern(new Pattern(std::stoi(arguments[0]), std::stof(arguments[1]), std::stof(arguments[2]), std::stof(arguments[3]), std::stof(arguments[4]), std::stof(arguments[5]), std::stof(arguments[6]), std::stof(arguments[7]), std::stoi(arguments[8]), std::stof(arguments[9]), std::stoi(arguments[10]), std::stof(arguments[11])));
+			AddPattern(new Pattern(std::stoi(arguments[0]), std::stof(arguments[1]), std::stof(arguments[2]), std::stof(arguments[3]), std::stof(arguments[4]), std::stof(arguments[5]), std::stof(arguments[6]), std::stof(arguments[7]), std::stoi(arguments[8]), std::stof(arguments[9]), std::stoi(arguments[10]), std::stof(arguments[11]), std::stoi(arguments[12])));
     	}
     	if(line.find("Trigger") != std::string::npos)
     	{

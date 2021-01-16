@@ -3,12 +3,15 @@
 #include "SDL_Setup.h"
 #include "Player.h"
 
-Bullet::Bullet(Player* Player, SDL_Renderer* renderer, float X, float Y, float ang, float vel, float accel)
+Bullet::Bullet(Player* Player, SDL_Renderer* renderer, float X, float Y, float ang, float vel, float accel, int CreatedAt, int Lifetime)
 {
 	sourceX = X;
 	sourceY = Y;
 	angle = ang;
 	velocity = vel;
+
+	CreatedAtTime = CreatedAt;
+	LifeTime = Lifetime;
 
 	width = 6;
 	height = 16;
@@ -32,7 +35,6 @@ auto Bullet::calculate_distance (float centerX, float centerY, float angle, floa
 	angle *= -1;
 	angle += 90;
 	angle = M_PI/ 180 * angle;
-
 
 	float x = centerX + velocity * cos(angle);
 	float y = centerY - velocity * sin(angle);
@@ -79,6 +81,13 @@ void Bullet::UpdateBullet()
 bool Bullet::CheckIfOutOfBounds()
 {
 	return (sourceX > (HEIGHT+100) || sourceX < -100 || sourceY > (HEIGHT+100) || sourceY < -100);
+}
+
+bool Bullet::CheckIfLifetimeIsOver(int CurrentTime)
+{
+	if(LifeTime < 0) return false;
+	if(CurrentTime - CreatedAtTime > LifeTime) return true;
+	else return false;
 }
 
 bool Bullet::CheckIfCollidedWithPlayer(float circleX, float circleY, float circleR, float centerX, float centerY, float rectW, float rectH)

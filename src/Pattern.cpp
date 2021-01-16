@@ -1,6 +1,6 @@
 #include "Pattern.h"
 
-Pattern::Pattern(int id, float x, float y, float startAt, float step, float dur, float ang, float vel, int rate, float accel, int rays, float spread)
+Pattern::Pattern(int id, float x, float y, float startAt, float step, float dur, float ang, float vel, int rate, float accel, int rays, float spread, int bulletLifetime)
 {
 	pattern_id = id;
 
@@ -15,6 +15,7 @@ Pattern::Pattern(int id, float x, float y, float startAt, float step, float dur,
 	angleStep = step;
 	NumOfRays = rays;
 	PatternSpread = spread;
+	bulletLifeTime = bulletLifetime;
 
 	lastSpawn = 0;
 	firstSpawn = SDL_GetTicks();
@@ -33,7 +34,7 @@ void Pattern::UpdatePattern(Player* Player, SDL_Renderer* renderer, int LevelSta
 	for(BulletIterator = Bullets.begin(); BulletIterator != Bullets.end();)
 	{
 		Bullets[index]->UpdateBullet(); 
-		if(Bullets[index]->CheckIfOutOfBounds())
+		if(Bullets[index]->CheckIfOutOfBounds() || Bullets[index]->CheckIfLifetimeIsOver(SDL_GetTicks()-LevelStartedAt))
 		{
 			delete Bullets[index];
 			Bullets[index] = NULL;
@@ -47,20 +48,20 @@ void Pattern::UpdatePattern(Player* Player, SDL_Renderer* renderer, int LevelSta
 	}
 
 	if(SDL_GetTicks() - lastSpawn > FireRate && SDL_GetTicks() - firstSpawn < duration && SDL_GetTicks()-LevelStartedAt >= startAtTime)
-		{
-			float offset = 0;
-			if(NumOfRays == 1) offset = 0;
-			else if(PatternSpread == 360) offset = (PatternSpread/(NumOfRays));
-			else offset = (PatternSpread/(NumOfRays-1));
+	{
+		float offset = 0;
+		if(NumOfRays == 1) offset = 0;
+		else if(PatternSpread == 360) offset = (PatternSpread/(NumOfRays));
+		else offset = (PatternSpread/(NumOfRays-1));
 
-			for(int i = 0; i < NumOfRays; i++)
-			{	
-				Bullets.push_back(new Bullet(Player, renderer, sourceX, sourceY, angle+(offset*i), velocity, acceleration));
-			}
-
-			angle += angleStep;
-			lastSpawn = SDL_GetTicks();
+		for(int i = 0; i < NumOfRays; i++)
+		{	
+			Bullets.push_back(new Bullet(Player, renderer, sourceX, sourceY, angle+(offset*i), velocity, acceleration, (SDL_GetTicks()-LevelStartedAt), bulletLifeTime));
 		}
+
+		angle += angleStep;
+		lastSpawn = SDL_GetTicks();
+	}
 }
 
 bool Pattern::CanDeletePattern()

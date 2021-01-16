@@ -3,24 +3,24 @@
 class CSprite
 {
 public:
-        CSprite(SDL_Renderer* passed_renderer, std::string FilePath, int x, int y, int w, int h, float angle);
-        ~CSprite(void);
+    CSprite(SDL_Renderer* passed_renderer, std::string FilePath, int x, int y, int w, int h, float angle);
+    ~CSprite(void);
  
-        void Draw();
+    void Draw();
 
-        void SetX(int X);
-        void SetY(int Y);
-        void SetRotation(float ang);
-        void SetPos(int X, int Y);
-        int GetX();
-        int GetY();
-        float GetRotation();
+    void SetX(int X);
+    void SetY(int Y);
+    void SetRotation(float ang);
+    void SetPos(int X, int Y);
+    int GetX();
+    int GetY();
+    float GetRotation();
  
 private:
-        SDL_Texture* image;
-        SDL_Rect rect;
+    SDL_Texture* image;
+    SDL_Rect rect;
 
-        float angle;
+    float angle;
  
-        SDL_Renderer* renderer;
+    SDL_Renderer* renderer;
 };

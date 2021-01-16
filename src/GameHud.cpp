@@ -3,11 +3,12 @@
 GameHud::GameHud(SDL_Renderer* Renderer) {
 	renderer = Renderer;
 
-	// heart1 = new CSprite(renderer, "packages/icons/heart_icon.png", HEIGHT+20, 10, 48, 48, 0);
-	// heart2 = new CSprite(renderer, "packages/icons/heart_icon.png", HEIGHT+70, 10, 48, 48, 0);
-	// heart3 = new CSprite(renderer, "packages/icons/heart_icon.png", HEIGHT+120, 10, 48, 48, 0);
-
 	HealthText = new CText(renderer, HEIGHT+20, 10, 30, 255, 255, 255, "Health: ");
+}
+
+GameHud::~GameHud() {
+	delete HealthText;
+	HealthText = NULL;
 }
 
 void GameHud::DrawBG() {
@@ -40,12 +41,7 @@ void GameHud::DrawBG() {
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 }
 
-void GameHud::DrawHearts(int health)
-{
-	// I really dont like this part, I wanna make a vector of hearts
-	// if(health > 0) heart1->Draw();
-	// if(health > 1) heart2->Draw();
-	// if(health > 2) heart3->Draw();
+void GameHud::DrawHearts(int health) {
 	HealthText->ChangeText("Health : " + std::to_string(health));
 	HealthText->Draw();
 }

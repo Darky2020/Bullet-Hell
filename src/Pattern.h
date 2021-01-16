@@ -7,7 +7,7 @@
 class Pattern
 {
 public:
-	Pattern(int id, float x, float y, float start, float step, float dur, float ang, float vel, int rate, float accel, int rays, float spread);
+	Pattern(int id, float x, float y, float start, float step, float dur, float ang, float vel, int rate, float accel, int rays, float spread, int bulletLifetime);
 	~Pattern();
 
 	int pattern_id;
@@ -23,6 +23,7 @@ public:
 	float angleStep;
 	int NumOfRays;
 	float PatternSpread;
+	int bulletLifeTime;
 
 	int lastSpawn;
 	int firstSpawn;

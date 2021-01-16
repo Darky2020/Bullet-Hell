@@ -15,5 +15,3 @@
 #define WIDTH 1280
 
 #define None -9999999
-
-// g++ Sprite.cpp SDL_Setup.cpp main.cpp Main.cpp Bullet.cpp Pattern.cpp Player.cpp -lSDL2 -lSDL2_image

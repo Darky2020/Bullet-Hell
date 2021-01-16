@@ -25,6 +25,12 @@ Player::Player(SDL_Renderer* renderer, SDL_Event* event, int x, int y)
 	health = 3;
 }
 
+Player::~Player()
+{
+	delete sprite;
+	sprite = NULL;
+}
+
 void Player::DrawPlayer()
 {
 	sprite->SetX(PosX);
