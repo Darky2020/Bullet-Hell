@@ -6,8 +6,7 @@ GameObjects::GameObjects(SDL_Renderer* renderer, SDL_Event* event) {
 	player = new Player(renderer, event, 400, 600);
 	gameStats = new GameHud(renderer);
 	Renderer = renderer;
-	song = new Sound("song.ogg");
-
+	song = NULL;
 	levelStarted = false;
 	LevelStartedAt = 0;
 }
@@ -17,6 +16,8 @@ GameObjects::~GameObjects() {
 	player = NULL;
 	delete gameStats;
 	gameStats = NULL;
+	delete song;
+	song = NULL;
 }
 
 void GameObjects::UpdatePatterns() {
@@ -127,8 +128,11 @@ void GameObjects::LoadLevel(std::string levelName) {
 	LevelStartedAt = SDL_GetTicks();
 	levelStarted = true;
 
-	song->PlaySong();
-	song->Offset(1);
+	if(song != NULL)
+	{
+		delete song;
+		song = NULL;
+	}
 
 	std::ifstream leveldata(levelName);
 	std::string line;
@@ -169,6 +173,25 @@ void GameObjects::LoadLevel(std::string levelName) {
 		    }
 
 			AddTrigger(new Trigger(std::stoi(arguments[0]), std::stoi(arguments[1]), std::stof(arguments[2]), std::stof(arguments[3]), std::stof(arguments[4]), std::stof(arguments[5]), std::stof(arguments[6]), std::stoi(arguments[7]), std::stof(arguments[8]), std::stoi(arguments[9]), std::stof(arguments[10])));
+    	}
+    	if(line.find("Song") != std::string::npos)
+    	{
+    		unsigned first = line.find("{") + 1;
+			unsigned last = line.find("}");
+			std::string actualdata = line.substr(first, last-first);
+
+			std::vector<char*> arguments;
+
+			char *token = strtok(strdup(actualdata.c_str()), ", ");
+
+			while (token != NULL)
+		    {
+		    	arguments.push_back(token);
+		        token = strtok(NULL, ", ");
+		    }
+		    song = new Sound(arguments[0]);
+		    song->PlaySong();
+		    song->Offset(std::stof(arguments[1]));
     	}
   	}
 }
