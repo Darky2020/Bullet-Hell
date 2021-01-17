@@ -3,6 +3,7 @@
 #include "main.h"
 #include "GameHud.h"
 #include "Trigger.h"
+#include "Sound.h"
 
 class GameObjects
 {
@@ -34,5 +35,6 @@ private:
 	Player* player;
 	SDL_Renderer* Renderer;
 	GameHud* gameStats;
+	Sound* song;
 	
 };

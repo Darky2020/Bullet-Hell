@@ -1,7 +1,7 @@
 import os
 
-flags = ["-lSDL2", "-lSDL2_image", "-lSDL2_ttf", "-std=gnu++1z"]
-files = ["Sprite.cpp", "SDL_Setup.cpp", "main.cpp", "Main.cpp", "Bullet.cpp", "Pattern.cpp", "Player.cpp", "Text.cpp", "GameHud.cpp", "Trigger.cpp", "GameObjects.cpp"]
+flags = ["-lSDL2", "-lSDL2_image", "-lSDL2_mixer", "-lSDL2_ttf", "-lmpg123", "-std=gnu++1z"]
+files = ["Sprite.cpp", "SDL_Setup.cpp", "main.cpp", "Main.cpp", "Bullet.cpp", "Pattern.cpp", "Player.cpp", "Text.cpp", "GameHud.cpp", "Trigger.cpp", "GameObjects.cpp", "Sound.cpp"]
 
 command = "g++ "
 for file in files:

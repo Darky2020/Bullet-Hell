@@ -3,16 +3,19 @@
 CSDL_Setup::CSDL_Setup(bool* running)
 {
 
-	if (SDL_Init( SDL_INIT_EVERYTHING ) < 0 )  
+	if (SDL_Init( SDL_INIT_EVERYTHING) < 0 )  
 	{  
 	    std::cout << "SDL could not initialize! SDL Error: " << SDL_GetError() << std::endl;  
 	    *running = false;
 	}  
 
+
 	TTF_Init();
 
+	Mix_Init(MIX_INIT_OGG);
+
 	window = NULL;
-	window =  SDL_CreateWindow("Unnamed bullet hell", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_OPENGL);  
+	window = SDL_CreateWindow("Unnamed bullet hell", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_OPENGL);  
 
 	if(window == NULL)
 	{

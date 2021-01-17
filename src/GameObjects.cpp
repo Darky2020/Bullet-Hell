@@ -6,6 +6,7 @@ GameObjects::GameObjects(SDL_Renderer* renderer, SDL_Event* event) {
 	player = new Player(renderer, event, 400, 600);
 	gameStats = new GameHud(renderer);
 	Renderer = renderer;
+	song = new Sound("song.ogg");
 
 	levelStarted = false;
 	LevelStartedAt = 0;
@@ -125,6 +126,9 @@ void GameObjects::LoadLevel(std::string levelName) {
 
 	LevelStartedAt = SDL_GetTicks();
 	levelStarted = true;
+
+	song->PlaySong();
+	song->Offset(1);
 
 	std::ifstream leveldata(levelName);
 	std::string line;
