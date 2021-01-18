@@ -1,7 +1,7 @@
 #include "SDL_Setup.h"
 #include "Trigger.h"
 
-Trigger::Trigger(int ExecTime, int targid, float x, float y, float step, float ang, float vel, int rate, float accel, int rays, float spread)
+Trigger::Trigger(int ExecTime, int targid, float x, float y, float step, float ang, float vel, int rate, float accel, int rays, float spread, int BulletLifeTime)
 {
 	ExecuteTime = ExecTime;
 	targetID = targid;
@@ -15,6 +15,7 @@ Trigger::Trigger(int ExecTime, int targid, float x, float y, float step, float a
 	changeAcceleration = accel;
 	changeRays = rays;
 	changeSpread = spread;
+	bulletLifetime = BulletLifeTime;
 }
 
 Trigger::~Trigger() 

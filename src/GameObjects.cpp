@@ -78,7 +78,8 @@ void GameObjects::UpdateTriggers() {
 				Triggers[index]->GetChangeRate(),
 				Triggers[index]->GetChangeAcceleration(),
 				Triggers[index]->GetChangeRays(),
-				Triggers[index]->GetChangeSpread());
+				Triggers[index]->GetChangeSpread(),
+				Triggers[index]->GetChangeBulletLifeime());
 
 			delete Triggers[index];
 			Triggers[index] = NULL;
@@ -134,7 +135,9 @@ void GameObjects::LoadLevel(std::string levelName) {
 		song = NULL;
 	}
 
-	std::ifstream leveldata(levelName);
+	std::string current_level_dir("Levels/"+levelName+"/");
+
+	std::ifstream leveldata(current_level_dir+"level.bhl");
 	std::string line;
 	while (std::getline(leveldata, line)) {
     	if(line.find("Pattern") != std::string::npos)
@@ -172,7 +175,7 @@ void GameObjects::LoadLevel(std::string levelName) {
 		        token = strtok(NULL, ", ");
 		    }
 
-			AddTrigger(new Trigger(std::stoi(arguments[0]), std::stoi(arguments[1]), std::stof(arguments[2]), std::stof(arguments[3]), std::stof(arguments[4]), std::stof(arguments[5]), std::stof(arguments[6]), std::stoi(arguments[7]), std::stof(arguments[8]), std::stoi(arguments[9]), std::stof(arguments[10])));
+			AddTrigger(new Trigger(std::stoi(arguments[0]), std::stoi(arguments[1]), std::stof(arguments[2]), std::stof(arguments[3]), std::stof(arguments[4]), std::stof(arguments[5]), std::stof(arguments[6]), std::stoi(arguments[7]), std::stof(arguments[8]), std::stoi(arguments[9]), std::stof(arguments[10]), std::stoi(arguments[11])));
     	}
     	if(line.find("Song") != std::string::npos)
     	{
@@ -189,7 +192,7 @@ void GameObjects::LoadLevel(std::string levelName) {
 		    	arguments.push_back(token);
 		        token = strtok(NULL, ", ");
 		    }
-		    song = new Sound(arguments[0]);
+		    song = new Sound(current_level_dir+arguments[0]);
 		    song->PlaySong();
 		    song->Offset(std::stof(arguments[1]));
     	}

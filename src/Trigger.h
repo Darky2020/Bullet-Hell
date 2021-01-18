@@ -5,7 +5,7 @@
 class Trigger
 {
 public:
-	Trigger(int ExecTime, int targid, float x, float y, float step, float ang, float vel, int rate, float accel, int rays, float spread);
+	Trigger(int ExecTime, int targid, float x, float y, float step, float ang, float vel, int rate, float accel, int rays, float spread, int BulletLifeTime);
 	~Trigger();
 
 	int ExecuteTime;
@@ -19,6 +19,7 @@ public:
 	float changeAcceleration;
 	int changeRays;
 	float changeSpread;
+	int bulletLifetime;
 
 	int GetTargetID() { return targetID; }
 	float GetChangeX() { return changeX; }
@@ -30,6 +31,7 @@ public:
 	float GetChangeAcceleration() { return changeAcceleration; }
 	int GetChangeRays() { return changeRays; }
 	float GetChangeSpread() { return changeSpread; }
+	int GetChangeBulletLifeime() { return bulletLifetime; }
 
 	bool CheckIfCanBeExecuted(int LevelStartedAt);
 };

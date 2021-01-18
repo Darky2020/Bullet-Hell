@@ -75,7 +75,7 @@ int Pattern::GetID()
 	return pattern_id;
 }
 
-void Pattern::ChangePattern(float x, float y, float step, float ang, float vel, int rate, float accel, int rays, float spread)
+void Pattern::ChangePattern(float x, float y, float step, float ang, float vel, int rate, float accel, int rays, float spread, int bulletLifetime)
 {
 	if(x != None)      sourceX = x;
 	if(y != None)      sourceY = y;
@@ -86,4 +86,5 @@ void Pattern::ChangePattern(float x, float y, float step, float ang, float vel, 
 	if(accel != None)  acceleration = accel;
 	if(rays != None)   NumOfRays = rays;
 	if(spread != None) PatternSpread = spread;
+	if(bulletLifetime) bulletLifeTime = bulletLifetime;
 }

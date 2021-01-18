@@ -7,7 +7,7 @@ CMain::CMain()
 
 	gameObjects = new GameObjects(csdl_setup->GetRenderer(), csdl_setup->GetEvent());
 
-	gameObjects->LoadLevel("level.bhl");
+	gameObjects->LoadLevel("Test");
 }
 
 CMain::~CMain(void)

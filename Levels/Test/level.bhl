@@ -1,0 +1,5 @@
+Song {song.ogg, 1.18}
+Pattern {0, 360, 360, 0, 3, 100, 10, 4, 1, -0.025, 11, 360, 3200}
+Trigger {5000, 0, None, None, -3, None, None, None, -0.03, None, None, 2750}
+Trigger {10000, 0, None, None, 3, None, None, None, -0.035, None, None, 2400}
+Trigger {15000, 0, None, None, -3, None, None, None, -0.04, None, None, 2150}
