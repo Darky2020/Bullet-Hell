@@ -2,6 +2,7 @@
 Simple Bullet Hell game (I didn't name yet) that I develop using c++ and SDL2. For now this is just an experiment but later I might turn it into a complete game.
 
 ![screenshot 1](packages/screenshot.png)
+![screenshot 1](packages/screenshot2.png)
 
 # How to compile
 On Ubuntu you need to run compile.py and it will create executable named "BulletHell". Note: you need to have g++ and SDL2 development libraries installed.
