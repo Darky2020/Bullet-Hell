@@ -13,7 +13,7 @@ public:
 
 	void DrawBullet();
 
-	void UpdateBullet();
+	void UpdateBullet(int LevelStartedAt, bool paused);
 
 	void MoveBullet();
 

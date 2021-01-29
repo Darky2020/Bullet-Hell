@@ -30,7 +30,7 @@ public:
 
 	std::vector<Bullet*> Bullets;
 
-	void UpdatePattern(Player* Player, SDL_Renderer* renderer, int LevelStartedAt);
+	void UpdatePattern(Player* Player, SDL_Renderer* renderer, int LevelStartedAt, bool paused);
 
 	bool CanDeletePattern();
 

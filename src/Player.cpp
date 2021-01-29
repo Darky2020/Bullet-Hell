@@ -70,16 +70,16 @@ void Player::Move()
 	}     
 }
 
-void Player::UpdatePlayer()
+void Player::UpdatePlayer(int LevelStartedAt, bool paused)
 {
 	centerX = (float)PosX+(PlayerSpriteWidth/2);
 	centerY = (float)PosY+(PlayerSpriteHeight/2);
 
-	if(HitAtTime+2000 > SDL_GetTicks() && HitAtTime > 0) isInvulnerable = true;
-	else isInvulnerable = false;
+	if(HitAtTime+2000 > SDL_GetTicks()-LevelStartedAt && HitAtTime > 0 || paused && HitAtTime > 0) isInvulnerable = true;
+	else {isInvulnerable = false; HitAtTime = 0;}
 
 	DrawPlayer();
-	Move();
+	if(!paused) Move();
 }
 
 float Player::returnPlayerCenterX() { return centerX; }
@@ -87,10 +87,10 @@ float Player::returnPlayerCenterY() { return centerY; }
 float Player::returnPlayerPosX() { return PosX; }
 float Player::returnPlayerPosY() { return PosY; }
 
-void Player::GotHit()
+void Player::GotHit(int LevelStartedAt)
 {
 	isInvulnerable = true;
-	HitAtTime = SDL_GetTicks();
+	HitAtTime = SDL_GetTicks()-LevelStartedAt;
 	health -= 1;
 }
 

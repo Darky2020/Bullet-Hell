@@ -9,6 +9,10 @@ GameObjects::GameObjects(SDL_Renderer* renderer, SDL_Event* event) {
 	song = NULL;
 	levelStarted = false;
 	LevelStartedAt = 0;
+
+	paused = false;
+
+	state = SDL_GetKeyboardState(NULL);
 }
 
 GameObjects::~GameObjects() {
@@ -26,7 +30,7 @@ void GameObjects::UpdatePatterns() {
 
 	for(PatternIterator = Patterns.begin(); PatternIterator != Patterns.end();)
 	{
-		Patterns[index]->UpdatePattern(player, Renderer, LevelStartedAt); 
+		Patterns[index]->UpdatePattern(player, Renderer, LevelStartedAt, paused); 
 		if(Patterns[index]->CanDeletePattern())
 		{
 			delete Patterns[index];
@@ -67,7 +71,7 @@ void GameObjects::UpdateTriggers() {
 
 	for(TriggerIterator = Triggers.begin(); TriggerIterator != Triggers.end();)
 	{
-		if(Triggers[index]->CheckIfCanBeExecuted(LevelStartedAt))
+		if(Triggers[index]->CheckIfCanBeExecuted(LevelStartedAt) && !paused)
 		{
 			GetPatternByID(Triggers[index]->GetTargetID())->ChangePattern(
 				Triggers[index]->GetChangeX(),
@@ -112,10 +116,14 @@ void GameObjects::DrawPlayerHitbox() {
 
 void GameObjects::UpdateGameObjects() {
 	if(!levelStarted) return;
+
+	if (state[SDL_SCANCODE_X]) { Pause(); }
+	if (state[SDL_SCANCODE_Y]) { Resume(); }
+
 	UpdatePatterns();
 	UpdateTriggers();
 
-	player->UpdatePlayer();
+	player->UpdatePlayer(LevelStartedAt, paused);
 	DrawPlayerHitbox();
 	
 	gameStats->DrawBG();
@@ -128,6 +136,7 @@ void GameObjects::LoadLevel(std::string levelName) {
 
 	LevelStartedAt = SDL_GetTicks();
 	levelStarted = true;
+	paused = false;
 
 	if(song != NULL)
 	{
@@ -197,4 +206,26 @@ void GameObjects::LoadLevel(std::string levelName) {
 		    song->Offset(std::stof(arguments[1]));
     	}
   	}
+}
+
+void GameObjects::Pause()
+{
+	if(!paused)
+	{
+		paused = true;
+		PausedAt = SDL_GetTicks();
+		song->Pause();
+	}
+}
+
+void GameObjects::Resume()
+{
+	if(paused)
+	{
+		int PauseDuration = SDL_GetTicks() - PausedAt;
+		LevelStartedAt += PauseDuration;
+		PausedAt = 0;
+		paused = false;
+		song->Resume();
+	}
 }

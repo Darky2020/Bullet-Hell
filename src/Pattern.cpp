@@ -26,15 +26,15 @@ Pattern::~Pattern()
 
 }
 
-void Pattern::UpdatePattern(Player* Player, SDL_Renderer* renderer, int LevelStartedAt)
+void Pattern::UpdatePattern(Player* Player, SDL_Renderer* renderer, int LevelStartedAt, bool paused)
 {
 	std::vector<Bullet*>::iterator BulletIterator;
 	int index = 0;
 
 	for(BulletIterator = Bullets.begin(); BulletIterator != Bullets.end();)
 	{
-		Bullets[index]->UpdateBullet(); 
-		if(Bullets[index]->CheckIfOutOfBounds() || Bullets[index]->CheckIfLifetimeIsOver(SDL_GetTicks()-LevelStartedAt))
+		Bullets[index]->UpdateBullet(LevelStartedAt, paused); 
+		if((Bullets[index]->CheckIfOutOfBounds() || Bullets[index]->CheckIfLifetimeIsOver(SDL_GetTicks()-LevelStartedAt)) && !paused)
 		{
 			delete Bullets[index];
 			Bullets[index] = NULL;
@@ -47,7 +47,7 @@ void Pattern::UpdatePattern(Player* Player, SDL_Renderer* renderer, int LevelSta
 		}
 	}
 
-	if(SDL_GetTicks() - lastSpawn > FireRate && SDL_GetTicks() - firstSpawn < duration && SDL_GetTicks()-LevelStartedAt >= startAtTime)
+	if(SDL_GetTicks() - lastSpawn > FireRate && SDL_GetTicks() - firstSpawn < duration && SDL_GetTicks()-LevelStartedAt >= startAtTime && !paused)
 	{
 		float offset = 0;
 		if(NumOfRays == 1) offset = 0;

@@ -18,7 +18,7 @@ public:
 
 	void DrawPlayer();
 	void Move();
-	void UpdatePlayer();
+	void UpdatePlayer(int LevelStartedAt, bool paused);
 
 	float speed;
 
@@ -39,7 +39,7 @@ public:
 
 	int returnPlayerHealth() {return health;}
 
-	void GotHit();
+	void GotHit(int LevelStartedAt);
 
 	bool isInvulnerable;
 	bool CheckIfInvulnerable();

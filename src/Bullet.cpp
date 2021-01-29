@@ -63,18 +63,18 @@ void Bullet::MoveBullet()
 	sourceY = y;
 }
 
-void Bullet::UpdateBullet()
+void Bullet::UpdateBullet(int LevelStartedAt, bool paused)
 {
 	DrawBullet();
-	MoveBullet();
+	if(!paused) MoveBullet();
 
 	float centerX = sourceX + width/2;
 	float centerY = sourceY + height/2;
 
 
-	if(CheckIfCollidedWithPlayer((float)player->returnPlayerCenterX(), (float)player->returnPlayerCenterY(), 5, centerX, centerY, width, height) && !player->CheckIfInvulnerable())
+	if(CheckIfCollidedWithPlayer((float)player->returnPlayerCenterX(), (float)player->returnPlayerCenterY(), 5, centerX, centerY, width, height) && !player->CheckIfInvulnerable() && !paused)
 	{
-		player->GotHit();
+		player->GotHit(LevelStartedAt);
 	}
 }
 

@@ -25,11 +25,19 @@ public:
 
 	void LoadLevel(std::string levelName);
 
+	void Pause();
+	void Resume();
+
 	std::vector<Pattern*> Patterns;
 	std::vector<Trigger*> Triggers;
 
 	bool levelStarted;
 	int LevelStartedAt;
+
+	bool paused;
+	int PausedAt;
+
+	const Uint8 *state;
 
 private:
 	Player* player;
