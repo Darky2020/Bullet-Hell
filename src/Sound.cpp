@@ -4,7 +4,7 @@ Sound::Sound(std::string FilePath)
 {
 	Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 640);
 	song = Mix_LoadMUS(FilePath.c_str());
-	if(song == NULL) printf("Could not open '%s'", FilePath.c_str());
+	if(song == NULL) printf("Could not open '%s'\n", FilePath.c_str());
 }
 
 Sound::~Sound()

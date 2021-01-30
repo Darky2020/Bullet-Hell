@@ -115,10 +115,12 @@ void GameObjects::DrawPlayerHitbox() {
 }
 
 void GameObjects::UpdateGameObjects() {
-	if(!levelStarted) return;
+	// if (state[SDL_SCANCODE_Z]) { Pause(); }
+	// if (state[SDL_SCANCODE_X]) { Resume(); }
+	// if (state[SDL_SCANCODE_C]) { Exit(); }
+	// if (state[SDL_SCANCODE_V]) { LoadLevel("Test"); }
 
-	if (state[SDL_SCANCODE_X]) { Pause(); }
-	if (state[SDL_SCANCODE_Y]) { Resume(); }
+	if(!levelStarted) return;
 
 	UpdatePatterns();
 	UpdateTriggers();
@@ -143,6 +145,8 @@ void GameObjects::LoadLevel(std::string levelName) {
 		delete song;
 		song = NULL;
 	}
+
+	player->Reset();
 
 	std::string current_level_dir("Levels/"+levelName+"/");
 
@@ -227,5 +231,20 @@ void GameObjects::Resume()
 		PausedAt = 0;
 		paused = false;
 		song->Resume();
+	}
+}
+
+void GameObjects::Exit()
+{
+	Patterns.clear();
+	Triggers.clear();
+	LevelStartedAt = 0;
+	levelStarted = false;
+	paused = false;
+
+	if(song != NULL)
+	{
+		delete song;
+		song = NULL;
 	}
 }

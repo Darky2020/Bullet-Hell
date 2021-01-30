@@ -27,6 +27,7 @@ public:
 
 	void Pause();
 	void Resume();
+	void Exit();
 
 	std::vector<Pattern*> Patterns;
 	std::vector<Trigger*> Triggers;

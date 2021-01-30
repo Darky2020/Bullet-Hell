@@ -31,6 +31,15 @@ Player::~Player()
 	sprite = NULL;
 }
 
+void Player::Reset()
+{
+	health = 3;
+	PosX = 400;
+	PosY = 600;
+	isInvulnerable = false;
+	HitAtTime = 0;
+}
+
 void Player::DrawPlayer()
 {
 	sprite->SetX(PosX);

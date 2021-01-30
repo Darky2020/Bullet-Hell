@@ -16,6 +16,7 @@ public:
 
 	SDL_Event* Event;
 
+	void Reset();
 	void DrawPlayer();
 	void Move();
 	void UpdatePlayer(int LevelStartedAt, bool paused);
