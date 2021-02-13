@@ -47,7 +47,7 @@ void Pattern::UpdatePattern(Player* Player, SDL_Renderer* renderer, int LevelSta
 		}
 	}
 
-	if(SDL_GetTicks() - lastSpawn > FireRate && SDL_GetTicks() - firstSpawn < duration && SDL_GetTicks()-LevelStartedAt >= startAtTime && !paused)
+	if(SDL_GetTicks()-LevelStartedAt - lastSpawn > FireRate && SDL_GetTicks()-LevelStartedAt - firstSpawn < duration && SDL_GetTicks()-LevelStartedAt >= startAtTime && !paused)
 	{
 		float offset = 0;
 		if(NumOfRays == 1) offset = 0;
@@ -60,7 +60,7 @@ void Pattern::UpdatePattern(Player* Player, SDL_Renderer* renderer, int LevelSta
 		}
 
 		angle += angleStep;
-		lastSpawn = SDL_GetTicks();
+		lastSpawn = SDL_GetTicks()-LevelStartedAt;
 	}
 }
 

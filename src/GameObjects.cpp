@@ -115,10 +115,10 @@ void GameObjects::DrawPlayerHitbox() {
 }
 
 void GameObjects::UpdateGameObjects() {
-	// if (state[SDL_SCANCODE_Z]) { Pause(); }
-	// if (state[SDL_SCANCODE_X]) { Resume(); }
-	// if (state[SDL_SCANCODE_C]) { Exit(); }
-	// if (state[SDL_SCANCODE_V]) { LoadLevel("Test"); }
+	if (state[SDL_SCANCODE_Z]) { Pause(); }
+	if (state[SDL_SCANCODE_X]) { Resume(); }
+	if (state[SDL_SCANCODE_C]) { Exit(); }
+	if (state[SDL_SCANCODE_V]) { LoadLevel("Test"); }
 
 	if(!levelStarted) return;
 
