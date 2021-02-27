@@ -1,11 +1,8 @@
 import os
 
-flags = ["-lSDL2", "-lSDL2_image", "-lSDL2_mixer", "-lSDL2_ttf", "-lmpg123", "-std=gnu++1z"]
-files = ["Sprite.cpp", "SDL_Setup.cpp", "main.cpp", "Main.cpp", "Bullet.cpp", "Pattern.cpp", "Player.cpp", "Text.cpp", "GameHud.cpp", "Trigger.cpp", "GameObjects.cpp", "Sound.cpp"]
+flags = ["-lGL", "-lSDL2", "-lSDL2_image", "-lSDL2_mixer", "-lSDL2_ttf", "-lmpg123", "-std=gnu++1z"]
 
-command = "g++ "
-for file in files:
-	command += "src/" + file + " "
+command = "g++ `sdl2-config --cflags` src/*.cpp src/imgui/*.cpp `sdl2-config --libs` "
 
 for flag in flags:
 	command += flag + " "
