@@ -4,6 +4,7 @@
 #include "GameHud.h"
 #include "Trigger.h"
 #include "Sound.h"
+#include "SDL_Setup.h"
 
 class GameObjects
 {
@@ -21,13 +22,15 @@ public:
 
 	void DrawPlayerHitbox();
 
-	void UpdateGameObjects();
+	void UpdateGameObjects(CSDL_Setup* csdl_setup);
 
 	void LoadLevel(std::string levelName);
 
 	void Pause();
 	void Resume();
 	void Exit();
+
+	void PauseMenu(ImFont* font, ImFont* titleFont);
 
 	std::vector<Pattern*> Patterns;
 	std::vector<Trigger*> Triggers;
@@ -36,14 +39,14 @@ public:
 	int LevelStartedAt;
 
 	bool paused;
-	int PausedAt;
+	int PausedAt, ResumedAt;
 
 	const Uint8 *state;
 
 private:
 	Player* player;
 	SDL_Renderer* Renderer;
-	GameHud* gameStats;
+	GameHud* gameHud;
 	Sound* song;
 	
 };

@@ -4,11 +4,13 @@
 GameObjects::GameObjects(SDL_Renderer* renderer, SDL_Event* event) {
 
 	player = new Player(renderer, event, 400, 600);
-	gameStats = new GameHud(renderer);
+	gameHud = new GameHud(renderer);
 	Renderer = renderer;
 	song = NULL;
 	levelStarted = false;
 	LevelStartedAt = 0;
+	PausedAt = 0;
+	ResumedAt = 0;
 
 	paused = false;
 
@@ -18,8 +20,8 @@ GameObjects::GameObjects(SDL_Renderer* renderer, SDL_Event* event) {
 GameObjects::~GameObjects() {
 	delete player;
 	player = NULL;
-	delete gameStats;
-	gameStats = NULL;
+	delete gameHud;
+	gameHud = NULL;
 	delete song;
 	song = NULL;
 }
@@ -31,7 +33,7 @@ void GameObjects::UpdatePatterns() {
 	for(PatternIterator = Patterns.begin(); PatternIterator != Patterns.end();)
 	{
 		Patterns[index]->UpdatePattern(player, Renderer, LevelStartedAt, paused); 
-		if(Patterns[index]->CanDeletePattern())
+		if(Patterns[index]->CanDeletePattern(LevelStartedAt))
 		{
 			delete Patterns[index];
 			Patterns[index] = NULL;
@@ -114,11 +116,8 @@ void GameObjects::DrawPlayerHitbox() {
 	SDL_SetRenderDrawColor(Renderer, 0, 0, 0, 0);
 }
 
-void GameObjects::UpdateGameObjects() {
-	if (state[SDL_SCANCODE_Z]) { Pause(); }
-	if (state[SDL_SCANCODE_X]) { Resume(); }
-	if (state[SDL_SCANCODE_C]) { Exit(); }
-	if (state[SDL_SCANCODE_V]) { LoadLevel("Test"); }
+void GameObjects::UpdateGameObjects(CSDL_Setup* csdl_setup) {
+	if (state[SDL_SCANCODE_Z] && SDL_GetTicks()-ResumedAt>1000 && !paused) { Pause(); }
 
 	if(!levelStarted) return;
 
@@ -128,17 +127,16 @@ void GameObjects::UpdateGameObjects() {
 	player->UpdatePlayer(LevelStartedAt, paused);
 	DrawPlayerHitbox();
 	
-	gameStats->DrawBG();
-	gameStats->DrawHearts(player->returnPlayerHealth());
+	gameHud->DrawBG();
+	gameHud->DrawHealth(player->returnPlayerHealth());
+
+	gameHud->UpdateImgui(csdl_setup);
+	if(paused) PauseMenu(csdl_setup->GetFont(), csdl_setup->GetFont2());
 }
 
 void GameObjects::LoadLevel(std::string levelName) {
 	Patterns.clear();
 	Triggers.clear();
-
-	LevelStartedAt = SDL_GetTicks();
-	levelStarted = true;
-	paused = false;
 
 	if(song != NULL)
 	{
@@ -209,6 +207,10 @@ void GameObjects::LoadLevel(std::string levelName) {
 		    song->PlaySong();
 		    song->Offset(std::stof(arguments[1]));
     	}
+
+    	LevelStartedAt = SDL_GetTicks(); // check this thingy
+		levelStarted = true;
+		paused = false;
   	}
 }
 
@@ -229,6 +231,7 @@ void GameObjects::Resume()
 		int PauseDuration = SDL_GetTicks() - PausedAt;
 		LevelStartedAt += PauseDuration;
 		PausedAt = 0;
+		ResumedAt = SDL_GetTicks();
 		paused = false;
 		song->Resume();
 	}
@@ -247,4 +250,47 @@ void GameObjects::Exit()
 		delete song;
 		song = NULL;
 	}
+}
+
+void GameObjects::PauseMenu(ImFont* font, ImFont* titleFont)
+{
+	ImGuiWindowFlags window_flags = 0;
+    window_flags |= ImGuiWindowFlags_NoTitleBar;
+    window_flags |= ImGuiWindowFlags_NoMove;
+    window_flags |= ImGuiWindowFlags_NoScrollbar;
+    window_flags |= ImGuiWindowFlags_NoResize;
+    window_flags |= ImGuiWindowFlags_NoCollapse;
+
+	ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.f, 0.f, 0.f, 0.6f));
+	ImGui::PushStyleColor(ImGuiCol_Border, ImVec4(0.f, 0.f, 0.f, 0.0f));
+	ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.f, 0.f, 0.f, 0.0f));
+	ImGui::Begin("PauseMenu", NULL, window_flags);
+	ImGui::SetWindowPos(ImVec2(0, 0));
+	ImGui::SetWindowSize(ImVec2(1280, 720));
+	ImGui::SetCursorPos(ImVec2(575, 100));
+	ImGui::PushFont(titleFont);
+	ImGui::Text("Paused");
+	ImGui::PopFont();
+	ImGui::PushFont(font);
+	ImGui::SetCursorPos(ImVec2(540, 250));
+	if (ImGui::Button("Resume", ImVec2(200, 80)))
+	{
+		Resume();
+	}
+	ImGui::SetCursorPos(ImVec2(540, 400));
+	if (ImGui::Button("Retry", ImVec2(200, 80)))
+	{
+		LoadLevel("Test");
+		Resume();
+	}
+	ImGui::SetCursorPos(ImVec2(540, 550));
+	if (ImGui::Button("Quit", ImVec2(200, 80)))
+	{
+		Exit();
+	}
+	ImGui::PopFont();
+	ImGui::End();
+	ImGui::PopStyleColor();
+	ImGui::PopStyleColor();
+	ImGui::PopStyleColor();
 }

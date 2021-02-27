@@ -25,10 +25,18 @@ void CMain::GameLoop()
 		SDL_Renderer* renderer = csdl_setup->GetRenderer();
 		SDL_Window* window = csdl_setup->GetWindow();
 
-		gameObjects->UpdateGameObjects();
+		ImGui::NewFrame();
+
+		ImGui::PushFont(csdl_setup->GetFont());
+
+		gameObjects->UpdateGameObjects(csdl_setup);
+		ImGui::PopFont();
+
+		ImGui::Render();
+		ImGuiSDL::Render(ImGui::GetDrawData()); 
 
 		SDL_RenderPresent(renderer);
-	    SDL_UpdateWindowSurface(window); 
+	    SDL_UpdateWindowSurface(window);
 
 		csdl_setup->End();
 

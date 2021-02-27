@@ -2,6 +2,7 @@
 #include "main.h"
 #include "Sprite.h"
 #include "Text.h"
+#include "SDL_Setup.h"
 
 class GameHud
 {
@@ -10,8 +11,8 @@ public:
 	~GameHud();
 
 	void DrawBG();
-
-	void DrawHearts(int health);
+	void DrawHealth(int health);
+	void UpdateImgui(CSDL_Setup* csdl_setup);
 
 	SDL_Renderer* renderer;
 
