@@ -41,6 +41,8 @@ public:
 	bool paused;
 	int PausedAt, ResumedAt;
 
+	int NumberOfBullets;
+
 	const Uint8 *state;
 
 private:

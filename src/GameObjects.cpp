@@ -14,6 +14,8 @@ GameObjects::GameObjects(SDL_Renderer* renderer, SDL_Event* event) {
 
 	paused = false;
 
+	NumberOfBullets = 0;
+
 	state = SDL_GetKeyboardState(NULL);
 }
 
@@ -27,11 +29,14 @@ GameObjects::~GameObjects() {
 }
 
 void GameObjects::UpdatePatterns() {
+	NumberOfBullets = 0;
 	std::vector<Pattern*>::iterator PatternIterator;
 	int index = 0;
 
 	for(PatternIterator = Patterns.begin(); PatternIterator != Patterns.end();)
 	{
+		NumberOfBullets += Patterns[index]->GetNumberOfBullets();
+
 		Patterns[index]->UpdatePattern(player, Renderer, LevelStartedAt, paused); 
 		if(Patterns[index]->CanDeletePattern(LevelStartedAt))
 		{
@@ -128,7 +133,7 @@ void GameObjects::UpdateGameObjects(CSDL_Setup* csdl_setup) {
 	DrawPlayerHitbox();
 	
 	gameHud->DrawBG();
-	gameHud->DrawHealth(player->returnPlayerHealth());
+	gameHud->DrawStats(player->returnPlayerHealth(), NumberOfBullets);
 
 	gameHud->UpdateImgui(csdl_setup);
 	if(paused) PauseMenu(csdl_setup->GetFont(), csdl_setup->GetFont2());

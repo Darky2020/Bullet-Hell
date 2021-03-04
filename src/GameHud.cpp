@@ -2,13 +2,10 @@
 
 GameHud::GameHud(SDL_Renderer* Renderer) {
 	renderer = Renderer;
-
-	HealthText = new CText(renderer, HEIGHT+20, 10, 30, 255, 255, 255, "Health: ");
 }
 
 GameHud::~GameHud() {
-	delete HealthText;
-	HealthText = NULL;
+
 }
 
 void GameHud::DrawBG() {
@@ -41,9 +38,30 @@ void GameHud::DrawBG() {
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 }
 
-void GameHud::DrawHealth(int health) {
-	HealthText->ChangeText("Health : " + std::to_string(health));
-	HealthText->Draw();
+void GameHud::DrawStats(int health, int NumberOfBullets) {
+
+	// HealthText->ChangeText("Health : " + std::to_string(health));
+	// HealthText->Draw();
+
+	ImGuiWindowFlags window_flags = 0;
+    window_flags |= ImGuiWindowFlags_NoTitleBar;
+    window_flags |= ImGuiWindowFlags_NoMove;
+    window_flags |= ImGuiWindowFlags_NoScrollbar;
+    window_flags |= ImGuiWindowFlags_NoResize;
+    window_flags |= ImGuiWindowFlags_NoCollapse;
+
+	ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.f, 0.f, 0.f, 1.f));
+	ImGui::PushStyleColor(ImGuiCol_Border, ImVec4(0.f, 0.f, 0.f, 1.f));
+	ImGui::Begin("Stats", NULL, window_flags);
+	ImGui::SetWindowPos(ImVec2(740, 10));
+	ImGui::SetWindowSize(ImVec2(700, 700));
+	ImGui::SetCursorPos(ImVec2(10, 10));
+	ImGui::Text("Health : %d", health);
+	ImGui::Text("Bullets : %d", NumberOfBullets);
+	ImGui::End();
+	ImGui::PopStyleColor();
+	ImGui::PopStyleColor();
+
 }
 
 void GameHud::UpdateImgui(CSDL_Setup* csdl_setup) {

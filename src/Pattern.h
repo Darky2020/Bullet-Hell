@@ -36,5 +36,6 @@ public:
 	int GetID();
 
 	void ChangePattern(float x, float y, float step, float ang, float vel, int rate, float accel, int rays, float spread, int bulletLifetime);
-	
+
+	int GetNumberOfBullets();
 };

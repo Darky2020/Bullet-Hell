@@ -87,3 +87,8 @@ void Pattern::ChangePattern(float x, float y, float step, float ang, float vel, 
 	if(spread != None) PatternSpread = spread;
 	if(bulletLifetime) bulletLifeTime = bulletLifetime;
 }
+
+int Pattern::GetNumberOfBullets()
+{
+	return Bullets.size();
+}
