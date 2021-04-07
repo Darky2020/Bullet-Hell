@@ -1,4 +1,5 @@
 #include "Main.h"
+#include "Fonts.h"
 
 CMain::CMain()
 {
@@ -27,7 +28,7 @@ void CMain::GameLoop()
 
 		ImGui::NewFrame();
 
-		ImGui::PushFont(csdl_setup->GetFont());
+		ImGui::PushFont(Fonts[DEFAULT_FONT]);
 
 		gameObjects->UpdateGameObjects(csdl_setup);
 		ImGui::PopFont();

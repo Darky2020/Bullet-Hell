@@ -1,4 +1,5 @@
 #include "SDL_Setup.h"
+#include "Fonts.h"
 
 CSDL_Setup::CSDL_Setup(bool* running)
 {
@@ -39,12 +40,6 @@ CSDL_Setup::CSDL_Setup(bool* running)
 		*running = true;
 	}
 
-	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO();
-	io.Fonts->AddFontDefault();
-    font = io.Fonts->AddFontFromFileTTF("packages/fonts/font.ttf", 25.f);
-    fontPauseMenuTitle = io.Fonts->AddFontFromFileTTF("packages/fonts/font.ttf", 45.f);
-
     ImGuiSDL::Initialize(renderer, 1280, 720);
 }
 
@@ -70,16 +65,6 @@ SDL_Event* CSDL_Setup::GetEvent()
 SDL_Window* CSDL_Setup::GetWindow()
 {
 	return window;
-}
-
-ImFont* CSDL_Setup::GetFont()
-{
-	return font;
-}
-
-ImFont* CSDL_Setup::GetFont2()
-{
-	return fontPauseMenuTitle;
 }
 
 void CSDL_Setup::Begin()

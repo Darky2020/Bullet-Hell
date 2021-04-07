@@ -30,7 +30,7 @@ public:
 	void Resume();
 	void Exit();
 
-	void PauseMenu(ImFont* font, ImFont* titleFont);
+	void PauseMenu();
 
 	std::vector<Pattern*> Patterns;
 	std::vector<Trigger*> Triggers;

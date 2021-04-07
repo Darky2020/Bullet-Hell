@@ -1,5 +1,6 @@
 #include "GameObjects.h"
 #include "SDL_DrawCircle.h"
+#include "Fonts.h"
 
 GameObjects::GameObjects(SDL_Renderer* renderer, SDL_Event* event) {
 
@@ -136,7 +137,7 @@ void GameObjects::UpdateGameObjects(CSDL_Setup* csdl_setup) {
 	gameHud->DrawStats(player->returnPlayerHealth(), NumberOfBullets);
 
 	gameHud->UpdateImgui(csdl_setup);
-	if(paused) PauseMenu(csdl_setup->GetFont(), csdl_setup->GetFont2());
+	if(paused) PauseMenu();
 }
 
 void GameObjects::LoadLevel(std::string levelName) {
@@ -257,7 +258,7 @@ void GameObjects::Exit()
 	}
 }
 
-void GameObjects::PauseMenu(ImFont* font, ImFont* titleFont)
+void GameObjects::PauseMenu()
 {
 	ImGuiWindowFlags window_flags = 0;
     window_flags |= ImGuiWindowFlags_NoTitleBar;
@@ -273,10 +274,10 @@ void GameObjects::PauseMenu(ImFont* font, ImFont* titleFont)
 	ImGui::SetWindowPos(ImVec2(0, 0));
 	ImGui::SetWindowSize(ImVec2(1280, 720));
 	ImGui::SetCursorPos(ImVec2(575, 100));
-	ImGui::PushFont(titleFont);
+	ImGui::PushFont(Fonts[PAUSE_MENU_TITLE_FONT]);
 	ImGui::Text("Paused");
 	ImGui::PopFont();
-	ImGui::PushFont(font);
+	ImGui::PushFont(Fonts[DEFAULT_FONT]);
 	ImGui::SetCursorPos(ImVec2(540, 250));
 	if (ImGui::Button("Resume", ImVec2(200, 80)))
 	{
