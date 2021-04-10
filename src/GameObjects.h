@@ -1,3 +1,4 @@
+#pragma once
 #include "Pattern.h"
 #include "Player.h"
 #include "main.h"
@@ -22,7 +23,7 @@ public:
 
 	void DrawPlayerHitbox();
 
-	void UpdateGameObjects(CSDL_Setup* csdl_setup);
+	void UpdateGameObjects(CSDL_Setup* csdl_setup, int *MenuState);
 
 	void LoadLevel(std::string levelName);
 
@@ -30,7 +31,7 @@ public:
 	void Resume();
 	void Exit();
 
-	void PauseMenu();
+	void PauseMenu(int *MenuState);
 
 	std::vector<Pattern*> Patterns;
 	std::vector<Trigger*> Triggers;

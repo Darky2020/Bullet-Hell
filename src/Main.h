@@ -4,6 +4,7 @@
 #include "Pattern.h"
 #include "GameObjects.h"
 #include "Trigger.h"
+#include "Menus.h"
 
 class CMain
 {
@@ -18,8 +19,12 @@ public:
 	Uint32 frameStart;
 	int frameTime;
 
+	int MenuState;
+
+	void UpdateImgui(CSDL_Setup* csdl_setup);
 	void GameLoop();
 private:
 	CSDL_Setup* csdl_setup;
 	GameObjects* gameObjects;
+	Menus* menus;
 };

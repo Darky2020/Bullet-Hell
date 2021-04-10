@@ -4,6 +4,7 @@
 enum {
     DEFAULT_FONT = 0,
     PAUSE_MENU_TITLE_FONT,
+    MAIN_MENU_TITLE_FONT,
 };
 
 static ImFont* CreateFont(const char* path, float size)
@@ -16,4 +17,5 @@ static ImFont* Fonts[] =
 {
     CreateFont("packages/fonts/font.ttf", 25.f),
     CreateFont("packages/fonts/font.ttf", 45.f),
+    CreateFont("packages/fonts/font.ttf", 60.f),
 };

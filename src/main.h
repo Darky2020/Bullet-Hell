@@ -18,3 +18,8 @@
 #define WIDTH 1280
 
 #define None -9999999
+
+enum {
+	MENUSTATE_MAINMENU = 0,
+	MENUSTATE_INGAME,
+};

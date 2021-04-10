@@ -122,7 +122,7 @@ void GameObjects::DrawPlayerHitbox() {
 	SDL_SetRenderDrawColor(Renderer, 0, 0, 0, 0);
 }
 
-void GameObjects::UpdateGameObjects(CSDL_Setup* csdl_setup) {
+void GameObjects::UpdateGameObjects(CSDL_Setup* csdl_setup, int *MenuState) {
 	if (state[SDL_SCANCODE_Z] && SDL_GetTicks()-ResumedAt>1000 && !paused) { Pause(); }
 
 	if(!levelStarted) return;
@@ -136,8 +136,7 @@ void GameObjects::UpdateGameObjects(CSDL_Setup* csdl_setup) {
 	gameHud->DrawBG();
 	gameHud->DrawStats(player->returnPlayerHealth(), NumberOfBullets);
 
-	gameHud->UpdateImgui(csdl_setup);
-	if(paused) PauseMenu();
+	if(paused) PauseMenu(MenuState);
 }
 
 void GameObjects::LoadLevel(std::string levelName) {
@@ -258,7 +257,7 @@ void GameObjects::Exit()
 	}
 }
 
-void GameObjects::PauseMenu()
+void GameObjects::PauseMenu(int *MenuState)
 {
 	ImGuiWindowFlags window_flags = 0;
     window_flags |= ImGuiWindowFlags_NoTitleBar;
@@ -293,6 +292,7 @@ void GameObjects::PauseMenu()
 	if (ImGui::Button("Quit", ImVec2(200, 80)))
 	{
 		Exit();
+		*MenuState = MENUSTATE_MAINMENU;
 	}
 	ImGui::PopFont();
 	ImGui::End();

@@ -11,7 +11,6 @@ public:
 
 	void DrawBG();
 	void DrawStats(int health, int NumberOfBullets);
-	void UpdateImgui(CSDL_Setup* csdl_setup);
 
 	SDL_Renderer* renderer;
 	
