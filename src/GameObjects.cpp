@@ -214,7 +214,7 @@ void GameObjects::LoadLevel(std::string levelName) {
 		    song->Offset(std::stof(arguments[1]));
     	}
 
-    	LevelStartedAt = SDL_GetTicks(); // check this thingy
+    	LevelStartedAt = SDL_GetTicks();
 		levelStarted = true;
 		paused = false;
   	}

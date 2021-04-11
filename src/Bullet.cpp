@@ -103,10 +103,10 @@ bool Bullet::CheckIfCollidedWithPlayer(float circleX, float circleY, float circl
 	float rx = centerX - rectW/2;
 	float ry = centerY - rectH/2;
 
-	if (rotatedX < rx)         testX = rx;      // test left edge
+	if(rotatedX < rx)             testX = rx;         // left edge
 	else if (rotatedX > rx+rectW) testX = rx+rectW;   // right edge
 
-	if (rotatedY < ry)         testY = ry;      // top edge
+	if(rotatedY < ry)             testY = ry;         // top edge
 	else if (rotatedY > ry+rectH) testY = ry+rectH;   // bottom edge
 
 	float distX = abs(rotatedX-testX);

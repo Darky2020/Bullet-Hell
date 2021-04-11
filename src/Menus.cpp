@@ -36,7 +36,6 @@ void Menus::DrawMainMenu(bool *running, int *MenuState, GameObjects *gameObjects
 	{
 		gameObjects->LoadLevel("Test");
 		*MenuState = MENUSTATE_INGAME;
-		// To do: change menu state
 	}
 	ImGui::SetCursorPos(ImVec2(540, 320));
 	if (ImGui::Button("Edit", ImVec2(200, 80)))

@@ -40,9 +40,6 @@ void GameHud::DrawBG() {
 
 void GameHud::DrawStats(int health, int NumberOfBullets) {
 
-	// HealthText->ChangeText("Health : " + std::to_string(health));
-	// HealthText->Draw();
-
 	ImGuiWindowFlags window_flags = 0;
     window_flags |= ImGuiWindowFlags_NoTitleBar;
     window_flags |= ImGuiWindowFlags_NoMove;

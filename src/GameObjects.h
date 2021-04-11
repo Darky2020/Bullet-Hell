@@ -40,7 +40,7 @@ public:
 	bool levelStarted;
 	int LevelStartedAt;
 
-	bool paused, dead;
+	bool paused;
 	int PausedAt, ResumedAt;
 
 	int NumberOfBullets;
