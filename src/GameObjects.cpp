@@ -136,7 +136,8 @@ void GameObjects::UpdateGameObjects(CSDL_Setup* csdl_setup, int *MenuState) {
 	gameHud->DrawBG();
 	gameHud->DrawStats(player->returnPlayerHealth(), NumberOfBullets);
 
-	if(paused) PauseMenu(MenuState);
+	if(player->returnPlayerHealth() < 1) FailedMenu(MenuState);
+	else if(paused) PauseMenu(MenuState);
 }
 
 void GameObjects::LoadLevel(std::string levelName) {
@@ -255,6 +256,46 @@ void GameObjects::Exit()
 		delete song;
 		song = NULL;
 	}
+}
+
+void GameObjects::FailedMenu(int *MenuState)
+{
+	Pause();
+	ImGuiWindowFlags window_flags = 0;
+    window_flags |= ImGuiWindowFlags_NoTitleBar;
+    window_flags |= ImGuiWindowFlags_NoMove;
+    window_flags |= ImGuiWindowFlags_NoScrollbar;
+    window_flags |= ImGuiWindowFlags_NoResize;
+    window_flags |= ImGuiWindowFlags_NoCollapse;
+
+	ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.f, 0.f, 0.f, 0.6f));
+	ImGui::PushStyleColor(ImGuiCol_Border, ImVec4(0.f, 0.f, 0.f, 0.0f));
+	ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.f, 0.f, 0.f, 0.0f));
+	ImGui::Begin("FailedMenu", NULL, window_flags);
+	ImGui::SetWindowPos(ImVec2(0, 0));
+	ImGui::SetWindowSize(ImVec2(1280, 720));
+	ImGui::SetCursorPos(ImVec2(575, 100));
+	ImGui::PushFont(Fonts[PAUSE_MENU_TITLE_FONT]);
+	ImGui::Text("Failed");
+	ImGui::PopFont();
+	ImGui::PushFont(Fonts[DEFAULT_FONT]);
+	ImGui::SetCursorPos(ImVec2(540, 250));
+	if (ImGui::Button("Retry", ImVec2(200, 80)))
+	{
+		LoadLevel("Test");
+		Resume();
+	}
+	ImGui::SetCursorPos(ImVec2(540, 400));
+	if (ImGui::Button("Quit", ImVec2(200, 80)))
+	{
+		Exit();
+		*MenuState = MENUSTATE_MAINMENU;
+	}
+	ImGui::PopFont();
+	ImGui::End();
+	ImGui::PopStyleColor();
+	ImGui::PopStyleColor();
+	ImGui::PopStyleColor();
 }
 
 void GameObjects::PauseMenu(int *MenuState)

@@ -31,6 +31,7 @@ public:
 	void Resume();
 	void Exit();
 
+	void FailedMenu(int *MenuState);
 	void PauseMenu(int *MenuState);
 
 	std::vector<Pattern*> Patterns;
@@ -39,7 +40,7 @@ public:
 	bool levelStarted;
 	int LevelStartedAt;
 
-	bool paused;
+	bool paused, dead;
 	int PausedAt, ResumedAt;
 
 	int NumberOfBullets;

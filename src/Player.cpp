@@ -44,9 +44,9 @@ void Player::DrawPlayer()
 {
 	sprite->SetX(PosX);
 	sprite->SetY(PosY);
-	if((SDL_GetTicks()%500<250 && isInvulnerable) || !isInvulnerable)
+	if((SDL_GetTicks()%500<250 && isInvulnerable) || !isInvulnerable || health < 1)
 	{
-	sprite->Draw();
+		sprite->Draw();
 	}
 }
 
@@ -85,7 +85,7 @@ void Player::UpdatePlayer(int LevelStartedAt, bool paused)
 	centerY = (float)PosY+(PlayerSpriteHeight/2);
 
 	if(HitAtTime+2000 > SDL_GetTicks()-LevelStartedAt && HitAtTime > 0 || paused && HitAtTime > 0) isInvulnerable = true;
-	else {isInvulnerable = false; HitAtTime = 0;}
+	else { isInvulnerable = false; HitAtTime = 0; }
 
 	DrawPlayer();
 	if(!paused) Move();

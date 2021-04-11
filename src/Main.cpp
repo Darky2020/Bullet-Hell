@@ -69,7 +69,6 @@ void CMain::GameLoop()
 			gameObjects->UpdateGameObjects(csdl_setup, &MenuState);
 		}
 
-
 		ImGui::PopFont();
 
 		ImGui::Render();
