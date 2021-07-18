@@ -1,5 +1,5 @@
 #include "main.h"
-#include "Main.h"
+#include "MainClass.h"
 
 int main(int argc, char const *argv[])
 {
