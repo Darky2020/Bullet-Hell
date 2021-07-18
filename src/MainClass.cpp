@@ -74,7 +74,6 @@ void CMain::GameLoop()
 		ImGui::Render();
 		ImGuiSDL::Render(ImGui::GetDrawData()); 
 
-		SDL_RenderPresent(renderer);
 	    SDL_UpdateWindowSurface(window);
 
 		csdl_setup->End();
