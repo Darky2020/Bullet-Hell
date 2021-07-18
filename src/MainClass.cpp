@@ -1,4 +1,4 @@
-#include "Main.h"
+#include "MainClass.h"
 #include "Fonts.h"
 
 CMain::CMain()
