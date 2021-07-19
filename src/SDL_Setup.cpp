@@ -113,15 +113,15 @@ void CSDL_Setup::ImGui_SDL2_ProcessEvent(const SDL_Event* event)
 	            if (event->wheel.y < 0) io.MouseWheel -= 0.4f;
 
 	            // Do this cause the case statement on its own doesn't keep up with lots of SDL_MOUSEWHEEL events and that causes delays in the event queue
-	            lastWheelScroll = event->wheel.timestamp;
+	            lastWheelScrollTimestamp = event->wheel.timestamp;
 	            SDL_Event temp_event;
         		while(SDL_PeepEvents(&temp_event, 1, SDL_GETEVENT, SDL_MOUSEWHEEL, SDL_MOUSEWHEEL) > 0)
         		{
-        			if (temp_event->wheel.x > 0) io.MouseWheelH += 0.4f;
-		            if (temp_event->wheel.x < 0) io.MouseWheelH -= 0.4f;
-		            if (temp_event->wheel.y > 0) io.MouseWheel += 0.4f;
-		            if (temp_event->wheel.y < 0) io.MouseWheel -= 0.4f;
-		            lastWheelScrollTimestamp = temp_event->wheel.timestamp;
+        			if (temp_event.wheel.x > 0) io.MouseWheelH += 0.4f;
+		            if (temp_event.wheel.x < 0) io.MouseWheelH -= 0.4f;
+		            if (temp_event.wheel.y > 0) io.MouseWheel += 0.4f;
+		            if (temp_event.wheel.y < 0) io.MouseWheel -= 0.4f;
+		            lastWheelScrollTimestamp = temp_event.wheel.timestamp;
         		}
 	            break;
         	}
