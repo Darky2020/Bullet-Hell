@@ -21,7 +21,6 @@ public:
 
 	int MenuState;
 
-	void UpdateImgui(CSDL_Setup* csdl_setup);
 	void GameLoop();
 private:
 	CSDL_Setup* csdl_setup;
